@@ -1,9 +1,9 @@
 body {
-	background: url(../img/dbg.jpg) repeat !important;
+	background: url(/assets/dbg.jpg) repeat !important;
 }
 		
 #content {
-	background: url(../img/bg.jpg) repeat;
+	background: url(/assets/bg.jpg) repeat;
 	filter: none;
 	padding: 25px 40px 25px 40px;
 	margin: -25px -4px;
