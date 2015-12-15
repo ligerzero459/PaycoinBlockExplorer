@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="dataSourceStorageLocal">
-    <data-source name="Rails PaycoinBlockExplorer: development" uuid="9f57fdd1-27bd-4c2c-a6d5-5585214fd2c6">
-      <auth-required>false</auth-required>
-    </data-source>
-  </component>
-</project>
