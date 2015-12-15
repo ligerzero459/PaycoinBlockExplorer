@@ -1,9 +1,9 @@
 %div
   %h1 Block
   %hr
-  %span= link_to 'Home', root_path
+  %span.breadcrumb= link_to 'Home', root_path
   %span /
-  %span Block: #{@block.height.to_s}
+  %span.breadcrumb Block: #{@block.height.to_s}
 
 %div
   %table
