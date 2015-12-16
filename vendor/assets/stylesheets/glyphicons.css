@@ -1458,7 +1458,7 @@
   margin: 0 8px 0 0;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url(../images/glyphicons.svg);
+  background-image: url(/assetss/glyphicons.svg);
   background-position: 0 0;
   background-repeat: no-repeat;
   vertical-align: top;
@@ -1468,20 +1468,20 @@
 }
 .glyphicons-icon _:-o-prefocus,
 .glyphicons-icon {
-  background-image: url(../images/glyphicons.png);
+  background-image: url(/assetss/glyphicons.png);
 }
 .no-inlinesvg .glyphicons-icon {
-  background-image: url(../images/glyphicons.png);
+  background-image: url(/assetss/glyphicons.png);
 }
 .glyphicons-icon.white {
-  background-image: url(../images/glyphicons-white.svg);
+  background-image: url(/assetss/glyphicons-white.svg);
 }
 .glyphicons-icon.white _:-o-prefocus,
 .glyphicons-icon.white {
-  background-image: url(../images/glyphicons-white.png);
+  background-image: url(/assetss/glyphicons-white.png);
 }
 .no-inlinesvg .glyphicons-icon.white {
-  background-image: url(../images/glyphicons-white.png);
+  background-image: url(/assetss/glyphicons-white.png);
 }
 .glyphicons-icon.glass {
   background-position: 4px 11px;

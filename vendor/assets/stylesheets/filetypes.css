@@ -438,7 +438,7 @@
   margin: 0 8px 0 0;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url(../images/glyphicons_filetypes.svg);
+  background-image: url(/assetss/glyphicons_filetypes.svg);
   background-position: 0 0;
   background-repeat: no-repeat;
   vertical-align: top;
@@ -448,20 +448,20 @@
 }
 .filetype-icon _:-o-prefocus,
 .filetype-icon {
-  background-image: url(../images/glyphicons_filetypes.png);
+  background-image: url(/assetss/glyphicons_filetypes.png);
 }
 .no-inlinesvg .filetype-icon {
-  background-image: url(../images/glyphicons_filetypes.png);
+  background-image: url(/assetss/glyphicons_filetypes.png);
 }
 .filetype-icon.white {
-  background-image: url(../images/glyphicons_filetypes-white.svg);
+  background-image: url(/assetss/glyphicons_filetypes-white.svg);
 }
 .filetype-icon.white _:-o-prefocus,
 .filetype-icon.white {
-  background-image: url(../images/glyphicons_filetypes-white.png);
+  background-image: url(/assetss/glyphicons_filetypes-white.png);
 }
 .no-inlinesvg .filetype-icon.white {
-  background-image: url(../images/glyphicons_filetypes-white.png);
+  background-image: url(/assetss/glyphicons_filetypes-white.png);
 }
 .filetype-icon.txt {
   background-position: 0px 0px;

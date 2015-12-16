@@ -12,7 +12,7 @@
 /* Basic
 =================================================================== */
 body {
-  background: url(../img/dbg.jpg) repeat;
+  background: url(/assets/dbg.jpg) repeat;
   color: #646464;
   border: none;
 }
@@ -26,31 +26,31 @@ hr {
   border-bottom: 1px solid #fefefe;
 }
 h1 {
-  font-size: 18px;
-  line-height: 18px;
+  font-size: 30px;
+  line-height: 30px;
 }
 h2 {
+  font-size: 23px;
+  line-height: 23px;
+}
+h3 {
+  font-size: 19px;
+  line-height: 19px;
+}
+h4 {
+  font-size: 17px;
+  line-height: 17px;
+}
+h5 {
   font-size: 16px;
   line-height: 16px;
 }
-h3 {
-  font-size: 15px;
-  line-height: 15px;
-}
-h4 {
+h6 {
   font-size: 14px;
   line-height: 14px;
 }
-h5 {
-  font-size: 13px;
-  line-height: 13px;
-}
-h6 {
-  font-size: 12px;
-  line-height: 12px;
-}
 #content {
-  background: url(../img/bg.jpg) repeat;
+  background: url(/assets/bg.jpg) repeat;
   padding: 25px;
   margin: -25px 0 0 0;
   position: relative;
@@ -201,8 +201,8 @@ h6 {
 /* Header Section
 =================================================================== */
 .navbar {
-  min-height: 40px;
-  background: url(../img/dbg.jpg);
+  min-height: 90px;
+  background: url(/assets/dbg.jpg);
   border: none;
   border-bottom: 2px solid #0a0c0e;
   filter: none;
@@ -247,7 +247,7 @@ h6 {
   border-left: 1px solid #212121;
   border-right: 1px solid #0a0c0e;
   color: #fff !important;
-  height: 42px;
+  min-height: 42px;
   float: right;
 }
 .header-nav .btn {
@@ -967,7 +967,7 @@ body.modal-open,
 footer {
   position: relative;
   min-height: 40px;
-  background: url(../img/dbg.jpg);
+  background: url(/assets/dbg.jpg);
   border-top: 1px solid #0a0c0e;
   border-bottom: 2px solid #0a0c0e;
   text-shadow: 1px 1px 1px #0a0c0e;
@@ -1061,7 +1061,7 @@ ul.chat li.left .message .arrow {
   position: absolute;
   top: 5px;
   left: -10px;
-  background: url(../img/chat-left.png) no-repeat 0px 0px;
+  background: url(/assets/chat-left.png) no-repeat 0px 0px;
 }
 ul.chat li.left .message .text {
   display: block;
@@ -1082,7 +1082,7 @@ ul.chat li.right .message .arrow {
   position: absolute;
   top: 5px;
   right: -10px;
-  background: url(../img/chat-right.png) no-repeat 0px 0px;
+  background: url(/assets/chat-right.png) no-repeat 0px 0px;
 }
 .chat-form {
   border-top: 1px solid #ddd;
