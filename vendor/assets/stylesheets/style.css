@@ -177,6 +177,15 @@ h6 {
 .yellow {
   color: #e8e57a;
 }
+.white {
+    color: #ffffff;
+}
+.paycoin-blue {
+    color: #119ec1;
+}
+.paycoin-dark-blue {
+    color: #164A55;
+}
 .clearfix {
   *zoom: 1;
 }
