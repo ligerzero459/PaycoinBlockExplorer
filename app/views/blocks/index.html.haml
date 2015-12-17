@@ -1,29 +1,25 @@
-%h1.white Listing blocks
+%div.col-lg-6
+  %h1.white Latest Blocks
 
-%table
-  %thead
-    %tr
-      %th Block Height
-      %th Hash
-      %th Transactions
-      %th Total Output
-
-  %tbody
-    - @blocks.each do |block|
+%div.col-xs-9.col-md-7
+  %table.table.white
+    %thead
       %tr
-        %td= link_to block.height.to_s, 'blocks/' << block.height.to_s
-        %td
-          = block.blockHash.to_s
-        %td
-          = (block.transactions.length).to_s
-        %td
-          - total_out = 0.0
-          - block.transactions.each do |tx|
-            - total_out += tx.totalOutput
-          = total_out.to_s
-        -#%td= link_to 'Edit', edit_block_path(block)
-        -#%td= link_to 'Destroy', block, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th Block Height
+        %th Hash
+        %th Transactions
+        %th Total Output
 
-%br
-
--#= link_to 'New Block', new_block_path
+    %tbody
+      - @blocks.each do |block|
+        %tr
+          %td= link_to block.height.to_s, 'blocks/' << block.height.to_s
+          %td
+            = block.blockHash.to_s
+          %td
+            = (block.transactions.length).to_s
+          %td
+            - total_out = 0.0
+            - block.transactions.each do |tx|
+              - total_out += tx.totalOutput
+            = total_out.to_s
