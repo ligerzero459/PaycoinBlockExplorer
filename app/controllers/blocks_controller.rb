@@ -1,5 +1,5 @@
 class BlocksController < ApplicationController
-  before_action :set_block, only: [:show, :edit, :update, :destroy]
+  before_action :set_block, only: [:show]
 
   # GET /blocks
   # GET /blocks.json
