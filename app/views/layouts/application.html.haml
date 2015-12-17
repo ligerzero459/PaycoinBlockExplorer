@@ -7,7 +7,13 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
-    .navbar{:style => "background: none; background-color: #164A55;"}
-      .navbar-brand
-        = link_to image_tag("logo.png", height: '85'), "/"
+    .navbar.navbar-default.navbar-fixed-top{:style => "background: none; background-color: #164A55;"}
+      .container
+        .navbar-header
+          .navbar-brand
+            = link_to image_tag("logo.png", height: '85'), "/"
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li.navbar-btn{:style => "height: 80px; width: 100px;"} API
+            %li.navbar-btn{:style => "height: 80px; width: 100px;"} Status
     = yield
