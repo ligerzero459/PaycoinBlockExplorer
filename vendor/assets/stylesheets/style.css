@@ -12,8 +12,9 @@
 /* Basic
 =================================================================== */
 body {
-  background: url(/assets/dbg.jpg) repeat;
+  background: url("/assets/dbg.jpg") repeat;
   color: #646464;
+  border: none;
   border: none;
 }
 a {

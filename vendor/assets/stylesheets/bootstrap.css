@@ -4673,6 +4673,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-btn {
   margin-top: 8px;
   margin-bottom: 8px;
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 20px;
+  font-size: 20pt;
 }
 
 .navbar-btn.btn-sm {
@@ -4909,7 +4913,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 8px 15px;
   margin-bottom: 20px;
   list-style: none;
-  background-color: #f5f5f5;
+  /*background-color: #f5f5f5;*/
   border-radius: 4px;
 }
 
