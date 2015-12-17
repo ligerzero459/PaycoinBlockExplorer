@@ -6604,6 +6604,9 @@ td.visible-xs {
 }
 
 @media (max-width: 767px) {
+  body {
+      padding-top: 90px;
+  }
   .visible-xs {
     display: block !important;
   }

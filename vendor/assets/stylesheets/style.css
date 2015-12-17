@@ -15,7 +15,7 @@ body {
   background: url("/assets/dbg.jpg") repeat;
   color: #646464;
   border: none;
-  border: none;
+  padding-top: 95px;
 }
 a {
   color: #646464;
@@ -2267,6 +2267,9 @@ ul.tickets li.ticket .content .date {
 /* All Mobile Sizes (devices and browser)
 ====================================================================== */
 @media only screen and (max-width: 767px) {
+  body {
+    padding-top: 0px;
+  }
   .header-nav {
     margin-right: 40px;
     padding: 0 15px;
