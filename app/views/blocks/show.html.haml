@@ -1,21 +1,40 @@
-%div
+%div.container.info
   %h1.white Block
   %hr
   %span.breadcrumb= link_to 'Home', root_path
   %span /
   %span.breadcrumb Block: #{@block.height.to_s}
 
-%div
+%div.row.container{:style => "margin-top: 15px;"}
   %div.col-lg-4
-    %div.box
-      %div.box-content
+    %div.panel.clearfix
+      %div.panel-body
         %h1 Block Info
         %hr
-        Block info will go here
+        %div.dl-horizontal
+          %div
+            %dt Height
+            %dd #{@block.height.to_s}
+          %div
+            %dt Block Time
+            %dd
+              - t = ActiveSupport::TimeZone["UTC"].parse(@block.blockTime.to_s[0..18])
+              = t.to_s
+          %div
+            %dt Total Output
+            %dd
+              - total = 0.0
+              - @block.transactions.each do |tx|
+                - total += tx.totalOutput
+              = total.to_s
+              XPY
+          %div
+            %dt Number of Txs
+            %dd #{@block.transactions.length.to_s}
 
   %div.col-lg-8
-    %div.box
-      %div.box-content
+    %div.panel.clearfix
+      %div.panel-body
         %h1 Transactions
         %hr
         Transactions will go here
