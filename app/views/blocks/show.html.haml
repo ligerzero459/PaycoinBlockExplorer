@@ -6,9 +6,9 @@
   %span.breadcrumb Block: #{@block.height.to_s}
 
 %div.row.container{:style => "margin-top: 15px;"}
-  %div.col-lg-4
+  %div.col-lg-5
     %div.panel.clearfix
-      %div.panel-body
+      %div.panel-body{:style => "padding-left: 50px; padding-right: 50px;"}
         %h1 Block Info
         %hr
         %div.dl-horizontal
@@ -31,10 +31,35 @@
           %div
             %dt Number of Txs
             %dd #{@block.transactions.length.to_s}
+          %div
+            %dt Difficulty
+            %dd test
+          %div
+            %dt Mint
+            %dd test
+          %div
+            %dt Value Out
+            %dd test
+          %div
+            %dt Confirmations
+            %dd test
+          %div
+            %dt Merkle root
+            %dd test
+          %div
+            %dt Previous block hash
+            %dd #{@block.previousBlockHash}
+          %div
+            %dt Next block hash
+            %dd #{@block.nextBlockHash}
+          %div
+            %dt Size
+            %dd test
 
-  %div.col-lg-8
-    %div.panel.clearfix
-      %div.panel-body
-        %h1 Transactions
-        %hr
-        Transactions will go here
+
+
+  %div.col-lg-7
+    %div
+      %h1 Transactions
+      %hr
+      Transactions will go here
