@@ -1,5 +1,6 @@
 class BlocksController < ApplicationController
   before_action :set_block, only: [:show]
+  helper_method :totalOut, :confirmations, :maxBlocks
 
   # GET /blocks
   # GET /blocks.json
@@ -16,6 +17,23 @@ class BlocksController < ApplicationController
   # GET /blocks/new
   def new
     @block = Block.new
+  end
+
+  # helpers
+  def totalOut(block)
+    total = 0.0
+    block.transactions.each do |tx|
+      total += tx.totalOutput
+    end
+    total.round(6)
+  end
+
+  def confirmations(block)
+    Block.where{height >= block.height}.count
+  end
+
+  def maxBlocks
+    Block.all.count
   end
 
   private
