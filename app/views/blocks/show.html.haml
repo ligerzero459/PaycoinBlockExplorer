@@ -14,7 +14,12 @@
         %div.dl-horizontal
           %div
             %dt Height
-            %dd #{@block.height.to_s}
+            %dd
+              - if (@block.height - 1 != 0)
+                = link_to image_tag("prev-arrow-2.png", height: '13'), (@block.height - 1).to_s
+              #{@block.height.to_s}
+              - if (@block.height != maxBlocks - 1)
+                = link_to image_tag("next-arrow-2.png", height: '13'), (@block.height + 1).to_s
           %div
             %dt Block Time
             %dd
@@ -23,43 +28,51 @@
           %div
             %dt Total Output
             %dd
-              - total = 0.0
-              - @block.transactions.each do |tx|
-                - total += tx.totalOutput
-              = total.to_s
+              = totalOut(@block)
               XPY
           %div
             %dt Number of Txs
             %dd #{@block.transactions.length.to_s}
           %div
             %dt Difficulty
-            %dd test
+            %dd #{@block.difficulty.round(8)}
           %div
             %dt Mint
-            %dd test
-          %div
-            %dt Value Out
-            %dd test
+            %dd #{@block.mint.round(6)}
           %div
             %dt Confirmations
-            %dd test
+            %dd
+              = confirmations(@block)
           %div
             %dt Merkle root
-            %dd test
+            %dd #{@block.merkleRoot}
           %div
             %dt Previous block hash
-            %dd #{@block.previousBlockHash}
+            %dd
+              - if (@block.height - 1 != 0)
+                = link_to @block.previousBlockHash, (@block.height - 1).to_s
+              - else
+                #{''}
           %div
             %dt Next block hash
-            %dd #{@block.nextBlockHash}
+            %dd
+              - if (@block.nextBlockHash != nil)
+                = link_to @block.nextBlockHash, (@block.height + 1).to_s
+              - else
+                #{''}
           %div
             %dt Size
-            %dd test
+            %dd #{(@block.blockSize.round(4) / 1000)} KB
 
-
+          %div
+            %dt Flags
+            %dd #{@block.flags}
 
   %div.col-lg-7
     %div
-      %h1 Transactions
+      %h1.white Transactions
       %hr
-      Transactions will go here
+      - @block.transactions.each do |tx|
+        %div.panel.clearfix
+          %div.panel-body
+            Test Transaction

@@ -19,7 +19,4 @@
           %td
             = (block.transactions.length).to_s
           %td
-            - total_out = 0.0
-            - block.transactions.each do |tx|
-              - total_out += tx.totalOutput
-            = total_out.to_s
+            = totalOut(block)
