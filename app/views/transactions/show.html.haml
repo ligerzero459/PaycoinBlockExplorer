@@ -1,6 +1,116 @@
-%p#notice= notice
+- content_for :title do
+  PBE TX - #{@transaction.txid}
+%div.container.info
+  %h1.white Transaction
+  %hr
+  %span.breadcrumb= link_to 'Home', root_path
+  %span /
+  - blockHeight = getBlockHeight(@transaction)
+  %span.breadcrumb= link_to 'Block: ' << blockHeight.to_s, '/blocks/' << blockHeight.to_s
+  %span /
+  %span.breadcrumb Tx: #{@transaction.txid}
+  %br
 
+  %div{:style => "margin-top: 50px;"}
+    %div.col-lg-12
+      %div.row
+        %div.panel
+          %div.panel-body
+            %div.dl-horizontal
+              %div.clearfix
+                %dt Hash
+                %dd #{@transaction.txid}
+              %div.clearfix
+                %dt Sum of incoming txs
+                %dd
+                  = inputSum(@transaction)
+              %div.clearfix
+                %dt Sum of outgoing txs
+                %dd
+                  = outputSum(@transaction)
+              %div.clearfix
+                %dt Traded
+                %dd #{@transaction.totalOutput} XPY
+              %div.clearfix
+                %dt Fee
+                %dd #{@transaction.fees} XPY
+              %div.clearfix
+                %dt Confirmations
+                %dd
+                  = confirmations(@transaction.block_id)
+              %div.clearfix
+                %dt Included in block
+                %dd #{@transaction.block_id - 1}
 
-= link_to 'Edit', edit_transaction_path(@transaction)
-\|
-= link_to 'Back', transactions_path
+      %div.wide-position
+        %div.col-lg-12
+          %div
+            %div.panel
+              %div.panel-body.clearfix
+                %div.block-info-content
+                  %div.addresses.clearfix
+                    - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                      - puts @transaction.type
+                      %div.col-xs-6
+                        %span.fresh-coins
+                          - if @transaction.coinstake == true
+                            Coinstake Transaction
+                          - else
+                            Newly Generated Coins
+                      %div.col-xs-6.from
+                        -@transaction.outputs.each do |output|
+                          %span
+                            %div
+                              - if output.address == '' && @transaction.coinbase == true
+                                %div.col-xs-9.text-left
+                                  NONSTANDARD
+                                %div.col-xs-3.text-right.spent
+                                  0.0
+                              - elsif output.address == '' && @transaction.coinbase == false
+
+                              - else
+                                %div.col-xs-9.text-left
+                                  #{output.address}
+                                %div.col-xs-3.text-right.spent
+                                  #{'%.6f' % output.value}
+
+                    - else
+                      %div.col-xs-6.block-info-content.to
+                        -@transaction.inputs.each do |input|
+                          %span
+                            %div.col-xs-9
+                              #{getInputAddress(input)}
+                            %div.col-xs-3.text-right.spent
+                              - if input.value != nil
+                                #{'%.6f' % (input.value * -1)}
+                              - else
+                                #{'%.6f' % input.value}
+                      %div.col-xs-6.block-info-content.from
+                        -@transaction.outputs.each do |output|
+                          %span
+                            %div.col-xs-9
+                              #{output.address}
+                            %div.col-xs-3.text-right.spent
+                              #{'%.6f' % output.value}
+                %div.info.sum.clearfix
+                  %div.col-sm-12
+                    %div.col-lg-9.text-right
+                      %div
+                        Fee:
+                      %div
+                        Traded:
+                      %div
+                        Transaction sum:
+                    %div.col-lg-3.text-left
+                      %div.fee
+                        - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                          0.000000 XPY
+                        - else
+                          #{'%.6f' % @transaction.fees.round(6)} XPY
+                      %div.fee
+                        - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                          #{'%.6f' % @transaction.fees.round(6)} XPY
+                        - else
+                          #{'%.6f' % @transaction.totalOutput} XPY
+                      %div
+                        #{'%.6f' % @transaction.totalOutput} XPY

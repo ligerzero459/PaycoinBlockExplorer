@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  helper_method :getInputAddress, :confirmations, :inputSum, :outputSum, :getBlockHeight
 
   # GET /transactions
   # GET /transactions.json
@@ -10,55 +11,27 @@ class TransactionsController < ApplicationController
   # GET /transactions/1
   # GET /transactions/1.json
   def show
+    @transaction =  Transaction.find(:txid => [params[:txid]])
   end
 
-  # GET /transactions/new
-  def new
-    @transaction = Transaction.new
+  def confirmations(block_id)
+    Block.where{id >= block_id}.count
   end
 
-  # GET /transactions/1/edit
-  def edit
+  def getInputAddress(input)
+    Output.where(:transaction_id => input.outputTransactionId, :n => input.vout).get(:address)
   end
 
-  # POST /transactions
-  # POST /transactions.json
-  def create
-    @transaction = Transaction.new(transaction_params)
-
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
-    end
+  def inputSum(tx)
+    Input.where(:transaction_id => tx.id).sum(:value)
   end
 
-  # PATCH/PUT /transactions/1
-  # PATCH/PUT /transactions/1.json
-  def update
-    respond_to do |format|
-      if @transaction.update(transaction_params)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transaction }
-      else
-        format.html { render :edit }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
-    end
+  def outputSum(tx)
+    Output.where(:transaction_id => tx.id).sum(:value)
   end
 
-  # DELETE /transactions/1
-  # DELETE /transactions/1.json
-  def destroy
-    @transaction.destroy
-    respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  def getBlockHeight(tx)
+    Block.where{id >= tx.block_id}.get(:height)
   end
 
   private
