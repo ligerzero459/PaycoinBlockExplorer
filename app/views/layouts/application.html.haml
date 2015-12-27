@@ -2,7 +2,11 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Paycoin Block Explorer
+    %title
+      - if content_for?(:title)
+        = content_for(:title)
+      - else
+        Paycoin Block Explorer
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
@@ -16,4 +20,7 @@
           %ul.nav.navbar-nav
             %li.navbar-btn{:style => "height: 80px; width: 100px;"} API
             %li.navbar-btn{:style => "height: 80px; width: 100px;"} Status
+          %ul.nav.navbar-nav{:style => "float: right;"}
+            %li.navbar-btn{:style => "height: 80px;"}
+
     = yield
