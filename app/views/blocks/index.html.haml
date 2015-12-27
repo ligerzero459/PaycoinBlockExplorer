@@ -1,22 +1,30 @@
-%div.col-lg-6
-  %h1.white Latest Blocks
+%div.col-lg-12.row
+  %div.container
+    %h1.white Latest Paycoin Blocks
+    %hr
 
-%div.col-xs-9.col-md-7
-  %table.table.white
-    %thead
-      %tr
-        %th Block Height
-        %th Hash
-        %th Transactions
-        %th Total Output
+%div.col-lg-12
+  %div.col-lg-1.clearfix
 
-    %tbody
-      - @blocks.each do |block|
-        %tr
-          %td= link_to block.height.to_s, 'blocks/' << block.height.to_s
-          %td
-            = block.blockHash.to_s
-          %td
-            = (block.transactions.length).to_s
-          %td
-            = totalOut(block)
+  %div.col-lg-10
+    %div.panel
+      %table.table
+        %thead
+          %tr
+            %th Block Height
+            %th Hash
+            %th Transactions
+            %th Total Output
+
+        %tbody
+          - @blocks.each do |block|
+            %tr
+              %td= link_to block.height.to_s, 'blocks/' << block.height.to_s
+              %td
+                = block.blockHash.to_s
+              %td
+                = (block.transactions.length).to_s
+              %td
+                = totalOut(block)
+
+  %div.col-lg-1.clearfix

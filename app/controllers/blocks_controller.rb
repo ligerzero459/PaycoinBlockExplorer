@@ -1,6 +1,7 @@
 class BlocksController < ApplicationController
   before_action :set_block, only: [:show]
   helper_method :totalOut, :confirmations, :maxBlocks
+  helper_method :getInputAddress
 
   # GET /blocks
   # GET /blocks.json
@@ -34,6 +35,12 @@ class BlocksController < ApplicationController
 
   def maxBlocks
     Block.all.count
+  end
+
+  def getInputAddress(input)
+    puts input.outputTransactionId
+    puts input.vout
+    Output.where(:transaction_id => input.outputTransactionId, :n => input.vout).get(:address)
   end
 
   private
