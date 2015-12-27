@@ -650,6 +650,8 @@ dd {
   }
   .dl-horizontal dd {
     margin-left: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .dl-horizontal dd:before,
   .dl-horizontal dd:after {
@@ -825,19 +827,26 @@ pre code {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
+  .container {
+    width: 1275px;
+  }
+}
+
+@media (min-width: 1680px) {
+  .container {
+    width: 1675px;
+  }
+}
+
+@media (min-width: 1900px) {
   .container {
     width: 1910px;
   }
 }
 
-/*@media (min-width: 1900px) {*/
-  /*.container {*/
-    /*width: 1890px;*/
-  /*}*/
-/*}*/
-
 .row {
+  float: left;
   margin-right: -15px;
   margin-left: -15px;
 }
@@ -861,6 +870,118 @@ pre code {
 .row:after {
   clear: both;
 }
+
+.info .sum {
+  border-top: 1px solid #ededed;
+  margin-top: 10px;
+  padding-top: 5px;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: 700;
+}
+
+.info .fee {
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .row {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1680px) {
+  .row {
+    width: 40%;
+  }
+}
+
+.block-info-tx {
+  display: table;
+  padding: 0px;
+  margin: 0px;
+  float: none;
+}
+
+.block-info-content {
+  display: table;
+  width: 100%;
+}
+
+.block-info-content .addresses {
+  border-top: 1px solid #dedede;
+  margin: 10px 0 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.block-info-content .badge {
+  overflow: hidden;
+  width: auto;
+  padding: 3px 4px;
+  color: #fff;
+  background-color: rgba(14, 44, 68, .9);
+  position: absolute;
+  z-index: 1;
+  top: 1px;
+  border-radius: 0
+}
+
+.block-info-content .to,
+.block-info-content .from{
+  padding: 0px;
+}
+
+.block-info-content .spent {
+  position: relative;
+  padding: 0px;
+}
+
+.block-info-spent {
+  display: table;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.wide-position {
+  float: left;
+}
+
+@media (min-width: 768px) {
+  .wide-position {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1680px) {
+  .wide-position {
+    width: 60%;
+    padding-left: 10px;
+  }
+}
+
+.fresh-coins {
+  background-color: #d6d6d6;
+  padding: 10px 12px;
+  color: #666666;
+  display: inline-block;
+  font-weight: 700;
+  line-height: 10px;
+}
+
+.coinbase,
+.coinstake {
+  padding: 3px 10px 6px;
+  background-color: #d6d6d6;
+  color: #666666;
+  font-size: 12px;
+  line-height: 10px;
+  font-weight: 700;
+  display: inline-block;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
 
 .col-xs-1,
 .col-sm-1,
@@ -914,6 +1035,8 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .col-xs-1,
@@ -4397,6 +4520,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border-top: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
   -webkit-overflow-scrolling: touch;
+}
+
+.navbar-collapse .search {
+  float: right;
+  margin: 0px;
 }
 
 .navbar-collapse:before,
