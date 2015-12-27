@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'blocks' => redirect('/')
   get 'blocks/:id' => 'blocks#show'
+  get 'tx/:txid' => 'transactions#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
