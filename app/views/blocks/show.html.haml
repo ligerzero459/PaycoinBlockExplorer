@@ -99,13 +99,13 @@
                 %div.addresses.clearfix
                   - if tx.type == 'PoW-Reward' || tx.type == 'PoS-Reward'
                     - puts tx.type
-                    %div.col-xs-6
+                    %div.col-xs-6.from
                       %span.fresh-coins
                         - if tx.coinstake == true
                           Coinstake Transaction
                         - else
                           Newly Generated Coins
-                    %div.col-xs-6.from
+                    %div.col-xs-6.to
                       -tx.outputs.each do |output|
                         %span
                           %div
@@ -123,7 +123,7 @@
                                 #{'%.6f' % output.value}
 
                   - else
-                    %div.col-xs-6.block-info-content.to
+                    %div.col-xs-6.block-info-content.from
                       -tx.inputs.each do |input|
                         %span
                           %div.col-xs-9
@@ -133,7 +133,7 @@
                               #{'%.6f' % (input.value * -1)}
                             - else
                               #{'%.6f' % input.value}
-                    %div.col-xs-6.block-info-content.from
+                    %div.col-xs-6.block-info-content.to
                       -tx.outputs.each do |output|
                         %span
                           %div.col-xs-9

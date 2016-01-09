@@ -12,8 +12,8 @@
   %br
 
   %div{:style => "margin-top: 50px;"}
-    %div.col-lg-12
-      %div.row
+    %div.row.transaction-info
+      %div.col-lg-12
         %div.panel
           %div.panel-body
             %div.dl-horizontal
@@ -42,75 +42,75 @@
                 %dt Included in block
                 %dd #{@transaction.block_id - 1}
 
-      %div.wide-position
-        %div.col-lg-12
-          %div
-            %div.panel
-              %div.panel-body.clearfix
-                %div.block-info-content
-                  %div.addresses.clearfix
-                    - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
-                      - puts @transaction.type
-                      %div.col-xs-6
-                        %span.fresh-coins
-                          - if @transaction.coinstake == true
-                            Coinstake Transaction
-                          - else
-                            Newly Generated Coins
-                      %div.col-xs-6.from
-                        -@transaction.outputs.each do |output|
-                          %span
-                            %div
-                              - if output.address == '' && @transaction.coinbase == true
-                                %div.col-xs-9.text-left
-                                  NONSTANDARD
-                                %div.col-xs-3.text-right.spent
-                                  0.0
-                              - elsif output.address == '' && @transaction.coinbase == false
-
-                              - else
-                                %div.col-xs-9.text-left
-                                  #{output.address}
-                                %div.col-xs-3.text-right.spent
-                                  #{'%.6f' % output.value}
-
-                    - else
-                      %div.col-xs-6.block-info-content.to
-                        -@transaction.inputs.each do |input|
-                          %span
-                            %div.col-xs-9
-                              #{getInputAddress(input)}
-                            %div.col-xs-3.text-right.spent
-                              - if input.value != nil
-                                #{'%.6f' % (input.value * -1)}
-                              - else
-                                #{'%.6f' % input.value}
-                      %div.col-xs-6.block-info-content.from
-                        -@transaction.outputs.each do |output|
-                          %span
-                            %div.col-xs-9
-                              #{output.address}
-                            %div.col-xs-3.text-right.spent
-                              #{'%.6f' % output.value}
-                %div.info.sum.clearfix
-                  %div.col-sm-12
-                    %div.col-lg-9.text-right
-                      %div
-                        Fee:
-                      %div
-                        Traded:
-                      %div
-                        Transaction sum:
-                    %div.col-lg-3.text-left
-                      %div.fee
-                        - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
-                          0.000000 XPY
+    %div.wide-position
+      %div.col-lg-12
+        %div
+          %div.panel
+            %div.panel-body.clearfix
+              %div.block-info-content
+                %div.addresses.clearfix
+                  - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                    - puts @transaction.type
+                    %div.col-xs-6.block-info-content.from
+                      %span.fresh-coins
+                        - if @transaction.coinstake == true
+                          Coinstake Transaction
                         - else
-                          #{'%.6f' % @transaction.fees.round(6)} XPY
-                      %div.fee
-                        - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
-                          #{'%.6f' % @transaction.fees.round(6)} XPY
-                        - else
-                          #{'%.6f' % @transaction.totalOutput} XPY
-                      %div
+                          Newly Generated Coins
+                    %div.col-xs-6.block-info-content.to
+                      -@transaction.outputs.each do |output|
+                        %span
+                          %div
+                            - if output.address == '' && @transaction.coinbase == true
+                              %div.col-xs-9.text-left
+                                NONSTANDARD
+                              %div.col-xs-3.text-right.spent
+                                0.0
+                            - elsif output.address == '' && @transaction.coinbase == false
+
+                            - else
+                              %div.col-xs-9.text-left
+                                #{output.address}
+                              %div.col-xs-3.text-right.spent
+                                #{'%.6f' % output.value}
+
+                  - else
+                    %div.col-xs-6.block-info-content.from.clearfix
+                      -@transaction.inputs.each do |input|
+                        %span
+                          %div.col-xs-9
+                            #{getInputAddress(input)}
+                          %div.col-xs-3.text-right.spent
+                            - if input.value != nil
+                              #{'%.6f' % (input.value * -1)}
+                            - else
+                              #{'%.6f' % input.value}
+                    %div.col-xs-6.block-info-content.to.clearfix
+                      -@transaction.outputs.each do |output|
+                        %span
+                          %div.col-xs-9
+                            #{output.address}
+                          %div.col-xs-3.text-right.spent
+                            #{'%.6f' % output.value}
+              %div.info.sum.clearfix
+                %div.col-sm-12
+                  %div.col-xs-9.col-sm-8.text-right
+                    %div
+                      Fee:
+                    %div
+                      Traded:
+                    %div
+                      Transaction sum:
+                  %div.col-xs-3.col-sm-4.text-left
+                    %div.fee
+                      - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                        0.000000 XPY
+                      - else
+                        #{'%.6f' % @transaction.fees.round(6)} XPY
+                    %div.fee
+                      - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                        #{'%.6f' % @transaction.fees.round(6)} XPY
+                      - else
                         #{'%.6f' % @transaction.totalOutput} XPY
+                    %div
+                      #{'%.6f' % @transaction.totalOutput} XPY
