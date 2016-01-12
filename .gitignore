@@ -17,5 +17,6 @@
 
 Gemfile.lock
 .idea/*
+.rbenv-vars
 
 .DS_Store

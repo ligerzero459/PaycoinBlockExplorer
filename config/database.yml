@@ -46,6 +46,6 @@ test:
 production:
   <<: *default
   database: XPYBlockchain
-  username: <%= ENV['APPNAME_DATABASE_USER'] %>
-  password: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
+  username: <%= ENV['PBE_DATABASE_USER'] %>
+  password: <%= ENV['PBE_DATABASE_PASSWORD'] %>
   host: localhost
