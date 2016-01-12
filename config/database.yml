@@ -46,6 +46,6 @@ test:
 production:
   <<: *default
   database: XPYBlockchain
-  username: paycoindb
-  password: paycoin
+  username: <%= ENV['APPNAME_DATABASE_USER'] %>
+  password: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
   host: localhost
