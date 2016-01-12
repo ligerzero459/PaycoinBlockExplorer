@@ -6,6 +6,7 @@ gem 'rails', '4.2.5'
 gem 'puma'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'pg'
 gem 'sequel-rails'
 # Use Haml for views
 gem 'haml'
