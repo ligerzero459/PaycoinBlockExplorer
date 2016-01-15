@@ -1,5 +1,5 @@
 class BlocksController < ApplicationController
-  before_action :set_block, only: [:show]
+  # before_action :set_block, only: [:show]
   helper_method :totalOut, :confirmations, :maxBlocks
   helper_method :getInputAddress
 
@@ -34,7 +34,7 @@ class BlocksController < ApplicationController
   end
 
   def maxBlocks
-    Block.all.count
+    Block.count
   end
 
   def getInputAddress(input)

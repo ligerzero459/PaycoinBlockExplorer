@@ -6,8 +6,8 @@ gem 'rails', '4.2.5'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'puma'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-gem 'pg'
+#gem 'pg'
+gem 'mysql2'
 gem 'sequel-rails'
 # Use Haml for views
 gem 'haml'
