@@ -36,6 +36,6 @@ module PaycoinBlockExplorer
       Sequel::Model.plugin :json_serializer
     end
 
-    config.assets.precompile += ['style.css', 'dbg.png']
+    config.assets.precompile += ['style.css', 'dbg.jpg']
   end
 end
