@@ -23,7 +23,7 @@ class BlocksController < ApplicationController
   # helpers
   def totalOut(block)
     total = 0.0
-    block.transactions.order(Sequel.asc(:id)).each do |tx|
+    block.transactions.each do |tx|
       total += tx.totalOutput
     end
     total.round(6)

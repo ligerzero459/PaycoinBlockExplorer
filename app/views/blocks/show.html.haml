@@ -79,7 +79,7 @@
       %div
         %h1.white Transactions
         %hr
-        - @block.transactions.each do |tx|
+        - @block.transactions.order(Sequel.asc(:id)).each do |tx|
           %div.panel
             %div.panel-body.clearfix
               %div.block-info-tx.col-sm-12.clearfix{:style => "padding-left: 15px; padding-bottom: 10px;"}
