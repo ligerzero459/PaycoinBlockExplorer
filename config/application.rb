@@ -35,5 +35,7 @@ module PaycoinBlockExplorer
       Sequel::Model.plugin :association_proxies
       Sequel::Model.plugin :json_serializer
     end
+
+    config.assets.precompile += ['style.css']
   end
 end
