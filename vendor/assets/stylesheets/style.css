@@ -12,7 +12,7 @@
 /* Basic
 =================================================================== */
 body {
-  background: url("/assets/dbg.jpg") repeat;
+  background: url("/assets/images/dbg.jpg") repeat;
   color: #646464;
   border: none;
   padding-top: 95px;
@@ -203,7 +203,7 @@ h6 {
 =================================================================== */
 .navbar {
   min-height: 90px;
-  background: url(/assets/dbg.jpg);
+  background: url(/assets/images/dbg.jpg);
   border: none;
   border-bottom: 2px solid #0a0c0e;
   filter: none;
@@ -968,7 +968,7 @@ body.modal-open,
 footer {
   position: relative;
   min-height: 40px;
-  background: url(/assets/dbg.jpg);
+  background: url(/assets/images/dbg.jpg);
   border-top: 1px solid #0a0c0e;
   border-bottom: 2px solid #0a0c0e;
   text-shadow: 1px 1px 1px #0a0c0e;
