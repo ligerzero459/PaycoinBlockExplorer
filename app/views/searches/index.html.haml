@@ -1,14 +1,18 @@
-%h1 Listing searches
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    %tr
-      %td= Test
-
 %br
+%div.col-lg-12
+  %div.col-lg-2.clearfix
+
+  %div.col-lg-8
+    %div.panel
+      %table.table
+        %tbody
+          - @results.each_with_index do |res, index|
+            %tr
+              - if res.type == 'block'
+                %td Block #{res.height}
+                %td= link_to res.resHash, '/blocks/' << res.height.to_s
+              - else
+                %td Transaction
+                %td= link_to res.resHash, '/tx/' << res.resHash
+
+  %div.col-lg-2.clearfix

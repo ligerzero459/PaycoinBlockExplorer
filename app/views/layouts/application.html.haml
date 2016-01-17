@@ -22,7 +22,7 @@
             %li.navbar-btn{:style => "height: 80px; width: 100px;"}
           %ul.nav.navbar-nav{:style => "float: right; width: 50%"}
             %li.navbar-btn{:style => "height: 80px; width: 100%;"}
-              = form_tag(searches_index_path, :method => "get", id: "search-form") do
+              = form_tag(searches_index_path, :method => "get") do
                 = text_field_tag :search, params[:search]
 
     = yield
