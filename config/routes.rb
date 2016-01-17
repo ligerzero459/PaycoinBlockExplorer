@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #resources :searches
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   get 'blocks' => redirect('/')
   get 'blocks/:id' => 'blocks#show'
   get 'tx/:txid' => 'transactions#show'
+  get 'searches/index' => 'searches#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -13,14 +13,16 @@
   %body
     .navbar.navbar-default.navbar-fixed-top{:style => "background: none; background-color: #119EC1;"}
       .container
-        .navbar-header
+        .navbar-header{:style => "width: 35%;"}
           .navbar-brand
             = link_to image_tag("logo.png", height: '85'), "/"
-        .navbar-collapse.collapse
-          %ul.nav.navbar-nav
+        .navbar-collapse.collapse{:style => "float: right; width: 65%;"}
+          %ul.nav.navbar-nav{:style => "float: left; width: 50%"}
             %li.navbar-btn{:style => "height: 80px; width: 100px;"}
             %li.navbar-btn{:style => "height: 80px; width: 100px;"}
-          %ul.nav.navbar-nav{:style => "float: right;"}
-            %li.navbar-btn{:style => "height: 80px;"}
+          %ul.nav.navbar-nav{:style => "float: right; width: 50%"}
+            %li.navbar-btn{:style => "height: 80px; width: 100%;"}
+              = form_tag(searches_index_path, :method => "get", id: "search-form") do
+                = text_field_tag :search, params[:search]
 
     = yield
