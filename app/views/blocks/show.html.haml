@@ -135,6 +135,8 @@
                               #{'%.6f' % input.value}
                     %div.col-xs-6.block-info-content.to
                       -tx.outputs.each do |output|
+                        - if output.type == 'nonstandard'
+                          - next
                         %span
                           %div.col-xs-9
                             #{output.address}
