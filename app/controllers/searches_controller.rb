@@ -4,11 +4,11 @@ class SearchesController < ApplicationController
   # GET /searches
   # GET /searches.json
   def index
-    if params[:search].strip!.length <= 7
-      block = Block.find(:height=>params[:search])
+    if (params[:search].strip.length <= 7)
+      block = Block.find(:height=>params[:search.strip])
     end
-    blocks = Block.where(Sequel.like(:blockHash, params[:search] + "%")).limit(4)
-    transactions = Transaction.where(Sequel.like(:txid, params[:search] + "%")).limit(4)
+    blocks = Block.where(Sequel.like(:blockHash, params[:search].strip + "%")).limit(4)
+    transactions = Transaction.where(Sequel.like(:txid, params[:search].strip + "%")).limit(4)
 
     @results = []
 
@@ -56,7 +56,7 @@ class SearchesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_search
-      @search = Search.find!(params[:search])
+      @search = Search.find!(params[:search].strip)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
