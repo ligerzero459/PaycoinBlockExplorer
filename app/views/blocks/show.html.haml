@@ -52,14 +52,14 @@
             %div
               %dt Merkle root
               %dd #{@block.merkleRoot}
-            %div
+            %div.clearfix
               %dt Previous block hash
               %dd
                 - if (@block.height - 1 != 0)
                   = link_to @block.previousBlockHash, (@block.height - 1).to_s
                 - else
                   #{''}
-            %div
+            %div.clearfix
               %dt Next block hash
               %dd
                 - if (@block.nextBlockHash != nil)
@@ -99,7 +99,7 @@
                 %div.addresses.clearfix
                   - if tx.type == 'PoW-Reward' || tx.type == 'PoS-Reward'
                     - puts tx.type
-                    %div.col-xs-6.from
+                    %div.col-xs-6
                       %span.fresh-coins
                         - if tx.coinstake == true
                           Coinstake Transaction
@@ -108,7 +108,7 @@
                     %div.col-xs-6.to
                       -tx.outputs.each do |output|
                         %span
-                          %div
+                          %div.clearfix
                             - if output.address == '' && tx.coinbase == true
                               %div.col-xs-9.text-left
                                 NONSTANDARD
