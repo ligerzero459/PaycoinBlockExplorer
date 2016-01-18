@@ -1,10 +1,10 @@
 class SearchesController < ApplicationController
-  before_action :set_search, only: [:show, :edit]
+  before_action :set_search, only: [:show]
 
   # GET /searches
   # GET /searches.json
   def index
-    if (params[:search].length <= 7)
+    if params[:search].strip!.length <= 7
       block = Block.find(:height=>params[:search])
     end
     blocks = Block.where(Sequel.like(:blockHash, params[:search] + "%")).limit(4)
