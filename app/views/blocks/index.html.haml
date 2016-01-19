@@ -15,6 +15,7 @@
             %th Hash
             %th Transactions
             %th Total Output
+            %th Time
 
         %tbody
           - @blocks.each do |block|
@@ -26,5 +27,7 @@
                 = (block.transactions.length).to_s
               %td
                 = totalOut(block)
+              %td
+                = time_ago_in_words(block.blockTime)
 
   %div.col-lg-2.clearfix
