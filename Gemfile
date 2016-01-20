@@ -18,6 +18,7 @@ gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
+gem 'local_time', '~> 1.0', '>= 1.0.3'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'execjs'
@@ -57,7 +58,7 @@ group :development do
 end
 
 group :production do
-  gem 'unicorn'
+  #gem 'unicorn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
