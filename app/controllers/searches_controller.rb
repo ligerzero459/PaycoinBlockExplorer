@@ -5,7 +5,7 @@ class SearchesController < ApplicationController
   # GET /searches.json
   def index
     if (params[:search].strip.length <= 7)
-      block = Block.find(:height=>params[:search.strip])
+      block = Block.find(:height=>params[:search].strip)
     end
     blocks = Block.where(Sequel.like(:blockHash, params[:search].strip + "%")).limit(4)
     transactions = Transaction.where(Sequel.like(:txid, params[:search].strip + "%")).limit(4)
