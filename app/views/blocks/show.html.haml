@@ -30,7 +30,8 @@
               %dt Block Time
               %dd
                 - t = ActiveSupport::TimeZone["UTC"].parse(@block.blockTime.to_s[0..18])
-                = t.to_s
+                = local_time(t.to_s, '%Y-%m-%d %H:%M:%S %Z')
+                (#{t.to_s})
             %div
               %dt Total Output
               %dd

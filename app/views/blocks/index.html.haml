@@ -28,6 +28,7 @@
               %td
                 = totalOut(block)
               %td
-                = time_ago_in_words(block.blockTime)
+                - t = ActiveSupport::TimeZone["UTC"].parse(block.blockTime.to_s[0..18])
+                = time_ago_in_words(local_time(t))
 
   %div.col-lg-2.clearfix

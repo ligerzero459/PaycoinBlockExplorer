@@ -13,3 +13,4 @@
 //= require turbolinks
 //= require_tree .
 //= //require custom
+//= require local_time
