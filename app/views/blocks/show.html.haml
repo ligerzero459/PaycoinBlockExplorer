@@ -18,7 +18,7 @@
             %div
               %dt Height
               %dd
-                - if (@block.height - 1 < 0)
+                - if (@block.height - 1 >= 0)
                   = link_to image_tag("prev-arrow-2.png", height: '13'), (@block.height - 1).to_s
                 #{@block.height.to_s}
                 - if (@block.height != maxBlocks - 1)
