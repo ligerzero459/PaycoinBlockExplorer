@@ -5,6 +5,13 @@
 
 %div.col-lg-12
   %div.col-lg-2.clearfix
+    = javascript_include_tag "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", :async => true
+    %ins{:class=>"adsbygoogle", :style=>"display:block",
+      'data-ad-client'=>"ca-pub-3918557346386109",
+      'data-ad-slot'=>"4748001338",
+      'data-ad-format'=>"auto"}
+    :javascript
+      (adsbygoogle = window.adsbygoogle || []).push({});
 
   %div.col-lg-8
     %div.panel
@@ -32,3 +39,10 @@
                 = time_ago_in_words(local_time(t))
 
   %div.col-lg-2.clearfix
+    = javascript_include_tag "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", :async => true
+    %ins{:class=>"adsbygoogle", :style=>"display:block",
+      'data-ad-client'=>"ca-pub-3918557346386109",
+      'data-ad-slot'=>"4748001338",
+      'data-ad-format'=>"auto"}
+    :javascript
+      (adsbygoogle = window.adsbygoogle || []).push({});
