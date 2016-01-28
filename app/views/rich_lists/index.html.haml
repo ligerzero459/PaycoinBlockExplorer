@@ -1,14 +1,30 @@
-%h1 Listing rich_lists
+%div.col-lg-12.row
+  %div.container
+    %h1.white Rich List
+    %hr
 
-%table
-  %thead
-    %tr
-      %th Rank
-      %th Address
-      %th Balance
+%div.col-lg-12
+  %div.col-lg-1.clearfix
 
-  %tbody
-    - @rich_lists.each do |rich_list|
-      %tr
-        %td
-        %td
+  %div.col-lg-10
+    %div.panel
+
+      %table.table
+        %thead
+          %tr
+            %th Rank
+            %th Address
+            %th Balance
+            %th Percentage of Total Coins
+
+        %tbody
+          - @rich_lists.each_with_index do |rich_list, position|
+            %tr
+              %td #{(position + 1).to_s}
+              %td #{rich_list.address}
+              %td
+                = "%.6f XPY" % rich_list.balance.round(6)
+              %td
+                = "%.2f%" % ((rich_list.balance.round(6) / @outstanding[0].coinSupply) * 100)
+
+  %div.col-lg-1.clearfix

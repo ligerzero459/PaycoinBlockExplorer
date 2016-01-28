@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'blocks/:id' => 'blocks#show'
   get 'tx/:txid' => 'transactions#show'
   get 'searches/index' => 'searches#index'
+  get 'richlist' => 'rich_lists#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

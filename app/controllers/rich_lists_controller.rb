@@ -4,10 +4,13 @@ class RichListsController < ApplicationController
   # GET /rich_lists.json
   def index
     if params[:limit] == nil
-      @rich_lists = Address.order(:balance).limit(25)
+      @rich_lists = Address.order(:balance).reverse.limit(25)
     else
       @rich_lists = Address.order(:balance).limit(params[:limit])
     end
+
+    @outstanding = OutstandingCoin.order(:coinSupply).limit(1)
+    @outstanding = @outstanding.all
   end
 
   private
