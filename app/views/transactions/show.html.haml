@@ -41,6 +41,13 @@
               %div.clearfix
                 %dt Included in block
                 %dd #{@transaction.block_id - 1}
+        = javascript_include_tag "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", :async => true
+        %ins{:class=>"adsbygoogle", :style=>"display:block",
+          'data-ad-client'=>"ca-pub-3918557346386109",
+          'data-ad-slot'=>"4748001338",
+          'data-ad-format'=>"auto"}
+        :javascript
+          (adsbygoogle = window.adsbygoogle || []).push({});
 
     %div.wide-position
       %div.col-lg-12
