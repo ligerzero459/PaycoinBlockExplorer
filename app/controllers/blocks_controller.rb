@@ -6,7 +6,7 @@ class BlocksController < ApplicationController
   # GET /blocks
   # GET /blocks.json
   def index
-    @blocks = Block.order(:height).reverse.limit(20)
+    @blocks = Block.order(:height).reverse.limit(30)
   end
 
   # GET /blocks/1
