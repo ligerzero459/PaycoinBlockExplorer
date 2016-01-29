@@ -6,7 +6,13 @@ class RichListsController < ApplicationController
     if params[:limit] == nil
       @rich_lists = Address.order(:balance).reverse.limit(25)
     else
-      @rich_lists = Address.order(:balance).limit(params[:limit])
+      params[:limit] = params[:limit].to_i
+      if params[:limit] == 0
+        params[:limit] = 25
+      elsif params[:limit] > 1000
+        params[:limit] = 1000
+      end
+      @rich_lists = Address.order(:balance).reverse.limit(params[:limit])
     end
 
     @outstanding = OutstandingCoin.order(:coinSupply).limit(1)

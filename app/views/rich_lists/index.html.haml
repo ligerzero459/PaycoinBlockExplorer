@@ -1,9 +1,21 @@
 %div.col-lg-12.row
   %div.container
-    %h1.white Rich List
+    %h1.white Richest Addresses <sup> (Top 25 Addresses) </sup>
     %hr
-
+    %span.breadcrumb= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
+    %span /
+    %span.breadcrumb Rich List
+    %br
 %div.col-lg-12
+  = form_tag(rich_lists_path, :method => 'get', :enforce_utf8 => false) do
+    %div.col-sm-9.clearfix
+    %div.col-sm-1.clearfix
+      = select_tag :limit, options_for_select([25, 100, 1000], 25), {:class => 'form-control'}
+    %div.col-sm-1.clearfix
+      = submit_tag 'OK', {:class => 'btn btn-default', :name => nil}
+    %div.col-sm-1.clearfix
+
+%div.col-lg-12{:style => "margin-top: 5px;"}
   %div.col-lg-1.clearfix
 
   %div.col-lg-10
