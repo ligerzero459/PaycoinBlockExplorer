@@ -3,10 +3,10 @@
 %div.container.info
   %h1.white Transaction
   %hr
-  %span.breadcrumb= link_to 'Home', root_path
+  %span.breadcrumb= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
   %span /
   - blockHeight = getBlockHeight(@transaction)
-  %span.breadcrumb= link_to 'Block: ' << blockHeight.to_s, '/blocks/' << blockHeight.to_s
+  %span.breadcrumb= link_to 'Block: ' << blockHeight.to_s, '/blocks/' << blockHeight.to_s, {:style=>"color: #428bcb;"}
   %span /
   %span.breadcrumb Tx: #{@transaction.txid}
   %br
