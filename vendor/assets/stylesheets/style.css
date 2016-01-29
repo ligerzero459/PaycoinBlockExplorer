@@ -1,7 +1,7 @@
 /*!
 * Author: Łukasz Holeczek
 * Template: Perfectum Dashboard - Bootstrap Admin Template
-* Version: 2.0.0 
+* Version: 2.0.0
 * Bootstrap version: 3.0.2
 * Copyright 2013 creativeLabs
 * www: http://bootstrapmaster.com
@@ -2347,4 +2347,12 @@ ul.tickets li.ticket .content .date {
     position: relative;
     z-index: 2;
   }
+}
+
+.search-box {
+  border-radius: 15px 30px;
+  padding-right: 10px;
+  padding-left: 15px;
+  float: right;
+  width: 100%;
 }
