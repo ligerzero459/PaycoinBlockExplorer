@@ -10,7 +10,7 @@
             %tr
               - if res.type == 'block'
                 %td Block #{res.height}
-                %td= link_to res.resHash, '/blocks/' << res.height.to_s
+                %td= link_to res.resHash, '/blocks/' << res.resHash.to_s
               - else
                 %td Transaction
                 %td= link_to res.resHash, '/tx/' << res.resHash
