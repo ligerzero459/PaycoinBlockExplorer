@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-  helper_method :getInputAddress, :confirmations, :inputSum, :outputSum, :getBlockHeight
+  helper_method :getInputAddress, :confirmations, :inputSum, :outputSum, :getBlockHeight, :getBlockHash
 
   # GET /transactions
   # GET /transactions.json
@@ -32,6 +32,10 @@ class TransactionsController < ApplicationController
 
   def getBlockHeight(tx)
     Block.where{id >= tx.block_id}.get(:height)
+  end
+
+  def getBlockHash(tx)
+    Block.where{id >= tx.block_id}.get(:blockHash)
   end
 
   private

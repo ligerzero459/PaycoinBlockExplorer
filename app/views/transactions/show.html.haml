@@ -6,7 +6,8 @@
   %span.breadcrumb= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
   %span /
   - blockHeight = getBlockHeight(@transaction)
-  %span.breadcrumb= link_to 'Block: ' << blockHeight.to_s, '/blocks/' << blockHeight.to_s, {:style=>"color: #428bcb;"}
+  - blockHash = getBlockHash(@transaction)
+  %span.breadcrumb= link_to 'Block: ' << blockHeight.to_s, '/blocks/' << blockHash.to_s, {:style=>"color: #428bcb;"}
   %span /
   %span.breadcrumb Tx: #{@transaction.txid}
   %br
@@ -40,7 +41,8 @@
                   = confirmations(@transaction.block_id)
               %div.clearfix
                 %dt Included in block
-                %dd #{@transaction.block_id - 1}
+                %dd
+                  = link_to (@transaction.block_id - 1).to_s, '/blocks/' << blockHash.to_s
         = javascript_include_tag "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", :async => true
         %ins{:class=>"adsbygoogle", :style=>"display:block",
           'data-ad-client'=>"ca-pub-3918557346386109",
