@@ -31,7 +31,8 @@
             %li.navbar-btn{:style => "height: 80px; width: 150px; padding-top: 20px;"}
           %ul.nav.navbar-nav{:style => "float: right; width: 35%"}
             %li.navbar-btn{:style => "height: 80px; width: 100%; padding-top: 20px;"}
-              = form_tag(searches_index_path, :method => "get", :enforce_utf8 => false) do
-                = text_field_tag :search, params[:search], :class => 'search-box'
+              %div.input-group
+                = form_tag(search_path, :method => "get", :enforce_utf8 => false) do
+                  = text_field_tag :search, params[:search], :class => 'search-box'
 
     = yield
