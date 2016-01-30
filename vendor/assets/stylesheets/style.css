@@ -2350,7 +2350,7 @@ ul.tickets li.ticket .content .date {
 }
 
 .search-box {
-  border-radius: 15px 30px;
+  /*border-radius: 15px 30px;*/
   padding-right: 10px;
   padding-left: 15px;
   float: right;
