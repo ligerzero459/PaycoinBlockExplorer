@@ -18,11 +18,11 @@
             %div
               %dt Height
               %dd
-                - if (@block.height - 1 >= 0)
-                  = link_to image_tag("prev-arrow-2.png", height: '13'), (@block.height - 1).to_s
+                - if @block.previousBlockHash != nil
+                  = link_to image_tag("prev-arrow-2.png", height: '13'), @block.previousBlockHash
                 #{@block.height.to_s}
-                - if (@block.height != maxBlocks - 1)
-                  = link_to image_tag("next-arrow-2.png", height: '13'), (@block.height + 1).to_s
+                - if @block.nextBlockHash != nil
+                  = link_to image_tag("next-arrow-2.png", height: '13'), @block.nextBlockHash
             %div
               %dt Block Hash
               %dd #{@block.blockHash}
@@ -56,15 +56,15 @@
             %div.clearfix
               %dt Previous block hash
               %dd
-                - if (@block.height - 1 != 0)
-                  = link_to @block.previousBlockHash, (@block.height - 1).to_s
+                - if @block.previousBlockHash != nil
+                  = link_to @block.previousBlockHash, @block.previousBlockHash
                 - else
                   #{''}
             %div.clearfix
               %dt Next block hash
               %dd
                 - if (@block.nextBlockHash != nil)
-                  = link_to @block.nextBlockHash, (@block.height + 1).to_s
+                  = link_to @block.nextBlockHash, @block.nextBlockHash
                 - else
                   #{''}
             %div

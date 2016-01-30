@@ -1,23 +1,15 @@
 class BlocksController < ApplicationController
-  # before_action :set_block, only: [:show]
   helper_method :totalOut, :confirmations, :maxBlocks
   helper_method :getInputAddress
 
   # GET /blocks
-  # GET /blocks.json
   def index
     @blocks = Block.order(:height).reverse.limit(30)
   end
 
-  # GET /blocks/1
-  # GET /blocks/1.json
+  # GET /blocks/{hash}
   def show
-    @block = Block.find(:height => [params[:id]])
-  end
-
-  # GET /blocks/new
-  def new
-    @block = Block.new
+    @block = Block.find(:blockHash => params[:id])
   end
 
   # helpers
@@ -46,7 +38,7 @@ class BlocksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_block
-      @block = Block.find(:height=>params[:id])
+      @block = Block.find(:blockHash=>params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
