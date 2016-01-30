@@ -9,10 +9,11 @@
 %div.col-lg-12
   = form_tag(richlist_path, :method => 'get', :enforce_utf8 => false) do
     %div.col-sm-9.clearfix
-    %div.col-sm-1.clearfix
-      = select_tag :limit, options_for_select([25, 100, 1000], 25), {:class => 'form-control'}
-    %div.col-sm-1.clearfix
-      = submit_tag 'OK', {:class => 'btn btn-default', :name => nil}
+    %div.col-sm-2.clearfix
+      %div.input-group
+        = select_tag :limit, options_for_select([25, 100, 1000], 25), {:class => 'form-control'}
+        %span.input-group-btn
+          = submit_tag 'OK', {:class => 'btn btn-default', :name => nil}
     %div.col-sm-1.clearfix
 
 %div.col-lg-12{:style => "margin-top: 5px;"}
