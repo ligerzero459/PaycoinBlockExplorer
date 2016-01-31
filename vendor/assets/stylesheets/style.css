@@ -2145,6 +2145,31 @@ ul.tickets li.ticket .content .date {
     position: relative;
     z-index: 2;
   }
+
+  .container .info {
+    width: 100%!important;
+    margin: 0 auto;
+    padding: 0 50px;
+    max-width: 1800px;
+  }
+
+  .section-info {
+    margin-bottom: 40px;
+  }
+
+  .section-info .h1 {
+    display: inline-block;
+    float: left;
+    margin: 0 0 10px;
+    padding-left: 15px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cdcdcd;
+  }
+
+  .pull-left {
+    float: left!important;
+  }
 }
 /* Higher than 980 (desktop devices)
 ====================================================================== */
