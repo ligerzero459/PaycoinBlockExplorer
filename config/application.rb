@@ -36,7 +36,7 @@ module PaycoinBlockExplorer
       Sequel::Model.plugin :json_serializer
     end
 
-    config.assets.precompile << Proc.new { |path, fn| fn =~ /vendor\/assets/ }
+    config.assets.precompile << Proc.new { |path, fn| fn =~ /vendor\/assets/ && %w(.js .css .jpg .png).include?(File.extname(path)) }
 
   end
 end
