@@ -12,7 +12,7 @@ Bundler.require(*Rails.groups)
 
 module PaycoinBlockExplorer
   class Application < Rails::Application
-    config.assets.paths << Rails.root.join("vendor","assets", "fonts", "images")
+    config.assets.paths << Rails.root.join("vendor", "assets", "fonts", "images")
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -36,6 +36,7 @@ module PaycoinBlockExplorer
       Sequel::Model.plugin :json_serializer
     end
 
-    config.assets.precompile += ['style.css', 'dbg.jpg']
+    config.assets.precompile << Proc.new { |path, fn| fn =~ /vendor\/assets/ }
+
   end
 end

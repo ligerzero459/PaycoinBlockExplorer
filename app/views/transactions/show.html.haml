@@ -1,125 +1,123 @@
 - content_for :title do
   PBE TX - #{@transaction.txid}
 %div.container.info
-  %h1.white Transaction
-  %hr
-  %span.breadcrumb= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
-  %span /
-  - blockHeight = getBlockHeight(@transaction)
-  - blockHash = getBlockHash(@transaction)
-  %span.breadcrumb= link_to 'Block: ' << blockHeight.to_s, '/blocks/' << blockHash.to_s, {:style=>"color: #428bcb;"}
-  %span /
-  %span.breadcrumb Tx: #{@transaction.txid}
-  %br
+  %div.section-info.clearfix
+    %h1.white Transaction
+    %ul.breadcrumb
+      %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
+      - blockHeight = getBlockHeight(@transaction)
+      - blockHash = getBlockHash(@transaction)
+      %li= link_to 'Block: ' << blockHeight.to_s, '/block/' << blockHash.to_s, {:style=>"color: #428bcb;"}
+      %li Tx: #{@transaction.txid}
 
-  %div{:style => "margin-top: 50px;"}
-    %div.row.transaction-info
-      %div.col-lg-12
+
+  %div.row{:id => 'transaction-info'}
+    %div.col-lg-12
+      %div.panel
+        %div.panel-body
+          %div.dl-horizontal
+            %div.clearfix
+              %dt Hash
+              %dd #{@transaction.txid}
+            %div.clearfix
+              %dt Sum of incoming txs
+              %dd
+                = inputSum(@transaction)
+            %div.clearfix
+              %dt Sum of outgoing txs
+              %dd
+                = outputSum(@transaction)
+            %div.clearfix
+              %dt Traded
+              %dd #{@transaction.totalOutput} XPY
+            %div.clearfix
+              %dt Fee
+              %dd #{@transaction.fees} XPY
+            %div.clearfix
+              %dt Confirmations
+              %dd
+                = confirmations(@transaction.block_id)
+            %div.clearfix
+              %dt Included in block
+              %dd
+                = link_to (@transaction.block_id - 1).to_s, '/block/' << blockHash.to_s
+      = javascript_include_tag "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", :async => true
+      %ins{:class=>"adsbygoogle", :style=>"display:block",
+        'data-ad-client'=>"ca-pub-3918557346386109",
+        'data-ad-slot'=>"4748001338",
+        'data-ad-format'=>"auto"}
+      :javascript
+        (adsbygoogle = window.adsbygoogle || []).push({});
+
+  %div.wide-position
+    %div.col-lg-12
+      %div
         %div.panel
-          %div.panel-body
-            %div.dl-horizontal
-              %div.clearfix
-                %dt Hash
-                %dd #{@transaction.txid}
-              %div.clearfix
-                %dt Sum of incoming txs
-                %dd
-                  = inputSum(@transaction)
-              %div.clearfix
-                %dt Sum of outgoing txs
-                %dd
-                  = outputSum(@transaction)
-              %div.clearfix
-                %dt Traded
-                %dd #{@transaction.totalOutput} XPY
-              %div.clearfix
-                %dt Fee
-                %dd #{@transaction.fees} XPY
-              %div.clearfix
-                %dt Confirmations
-                %dd
-                  = confirmations(@transaction.block_id)
-              %div.clearfix
-                %dt Included in block
-                %dd
-                  = link_to (@transaction.block_id - 1).to_s, '/blocks/' << blockHash.to_s
-        = javascript_include_tag "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", :async => true
-        %ins{:class=>"adsbygoogle", :style=>"display:block",
-          'data-ad-client'=>"ca-pub-3918557346386109",
-          'data-ad-slot'=>"4748001338",
-          'data-ad-format'=>"auto"}
-        :javascript
-          (adsbygoogle = window.adsbygoogle || []).push({});
-
-    %div.wide-position
-      %div.col-lg-12
-        %div
-          %div.panel
-            %div.panel-body.clearfix
-              %div.block-info-content
-                %div.addresses.clearfix
-                  - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
-                    - puts @transaction.type
-                    %div.col-xs-6.block-info-content.from
-                      %span.fresh-coins
-                        - if @transaction.coinstake == true
-                          Coinstake Transaction
-                        - else
-                          Newly Generated Coins
-                    %div.col-xs-6.block-info-content.to
-                      -@transaction.outputs.each do |output|
-                        %span
-                          %div
-                            - if output.address == '' && @transaction.coinbase == true
-                              %div.col-xs-9.text-left
-                                NONSTANDARD
-                              %div.col-xs-3.text-right.spent
-                                0.0
-                            - elsif output.address == '' && @transaction.coinbase == false
-
-                            - else
-                              %div.col-xs-9.text-left
-                                #{output.address}
-                              %div.col-xs-3.text-right.spent
-                                #{'%.6f' % output.value}
-
-                  - else
-                    %div.col-xs-6.block-info-content.from.clearfix
-                      -@transaction.inputs.each do |input|
-                        %span
-                          %div.col-xs-9
-                            #{getInputAddress(input)}
-                          %div.col-xs-3.text-right.spent
-                            - if input.value != nil
-                              #{'%.6f' % (input.value * -1)}
-                            - else
-                              #{'%.6f' % input.value}
-                    %div.col-xs-6.block-info-content.to.clearfix
-                      -@transaction.outputs.each do |output|
-                        %span
-                          %div.col-xs-9
-                            #{output.address}
-                          %div.col-xs-3.text-right.spent
-                            #{'%.6f' % output.value}
-              %div.info.sum.clearfix
-                %div.col-sm-12
-                  %div.col-xs-9.col-sm-8.text-right
-                    %div
-                      Fee:
-                    %div
-                      Traded:
-                    %div
-                      Transaction sum:
-                  %div.col-xs-3.col-sm-4.text-left
-                    %div.fee
-                      - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
-                        0.000000 XPY
+          %div.panel-body.clearfix
+            %div.block-info-content
+              %div.addresses.clearfix
+                - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                  - puts @transaction.type
+                  %div.col-xs-6
+                    %span.fresh-coins
+                      - if @transaction.coinstake == true
+                        Coinstake Transaction
                       - else
-                        #{'%.6f' % @transaction.fees.round(6)} XPY
-                    %div.fee
-                      - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
-                        #{'%.6f' % @transaction.fees.round(6)} XPY
-                      - else
-                        #{'%.6f' % @transaction.totalOutput} XPY
-                    %div
+                        Newly Generated Coins
+                  %div.col-xs-6.to
+                    -@transaction.outputs.each do |output|
+                      %span
+                        %div
+                          - if output.address == '' && @transaction.coinbase == true
+                            %div.col-xs-9.text-left
+                              NONSTANDARD
+                            %div.col-xs-3.text-right.spent
+                              0.0
+                          - elsif output.address == '' && @transaction.coinbase == false
+
+                          - else
+                            %div.col-xs-9.text-left
+                              =link_to output.address, '/address/' + output.address
+                            %div.col-xs-3.text-right.spent
+                              #{'%.6f' % output.value}
+
+                - else
+                  %div.col-xs-6.from.clearfix
+                    -@transaction.inputs.each do |input|
+                      %span
+                        %div.col-xs-9
+                          =link_to input.address, '/address/' + input.address
+                        %div.col-xs-3.text-right.spent
+                          - if input.value != nil
+                            #{'%.6f' % (input.value * -1)}
+                          - else
+                            #{'%.6f' % input.value}
+                  %div.col-xs-6.to.clearfix
+                    -@transaction.outputs.each do |output|
+                      %span
+                        %div.col-xs-9
+                          =link_to output.address, '/address/' + output.address
+                        %div.col-xs-3.text-right.spent
+                          #{'%.6f' % output.value}
+            %div.info.sum.clearfix
+              %div.col-sm-12
+                %div.col-xs-9.col-sm-8.text-right
+                  %div
+                    Fee:
+                  %div
+                    Traded:
+                  %div
+                    Transaction sum:
+                %div.col-xs-3.col-sm-4.text-left
+                  %div.fee
+                    - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                      0.000000 XPY
+                    - else
+                      #{'%.6f' % @transaction.fees.round(6)} XPY
+                  %div.fee
+                    - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                      #{'%.6f' % @transaction.fees.round(6)} XPY
+                    - else
                       #{'%.6f' % @transaction.totalOutput} XPY
+                  %div
+                    #{'%.6f' % @transaction.totalOutput} XPY

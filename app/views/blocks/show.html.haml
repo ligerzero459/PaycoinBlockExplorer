@@ -1,14 +1,13 @@
 - content_for :title do
   PBE Block - #{@block.height.to_s}
 %div.container.info
-  %h1.white Block
-  %hr
-  %span.breadcrumb= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
-  %span /
-  %span.breadcrumb Block: #{@block.height.to_s}
-  %br
+  %div.section-info.clearfix
+    %h1.pull-left.white Block
+    %ul.breadcrumb
+      %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
+      %li Block: #{@block.height.to_s}
 
-  %div.row{:style => "margin-top: 50px;"}
+  %div.row
     %div.col-lg-12
       %div.panel.clearfix
         %div.panel-body{:style => "padding-left: 35px; padding-right: 35px;"}
@@ -126,7 +125,7 @@
 
                             - else
                               %div.col-xs-9.text-left
-                                #{output.address}
+                                =link_to output.address, '/address/' + output.address
                               %div.col-xs-3.text-right.spent
                                 #{'%.6f' % output.value}
 
@@ -135,7 +134,8 @@
                       -tx.inputs.each do |input|
                         %span
                           %div.col-xs-9
-                            #{getInputAddress(input)}
+                            - iAddress = getInputAddress(input)
+                            =link_to input.address, '/address/' + input.address
                           %div.col-xs-3.text-right.spent
                             - if input.value != nil
                               #{'%.6f' % (input.value * -1)}
@@ -147,7 +147,7 @@
                           - next
                         %span
                           %div.col-xs-9
-                            #{output.address}
+                            =link_to output.address, '/address/' + output.address
                           %div.col-xs-3.text-right.spent
                             #{'%.6f' % output.value}
               %div.info.sum.clearfix

@@ -1,11 +1,11 @@
 %div.col-lg-12.row
-  %div.container
-    %h1.white Richest Addresses <sup> (Top 25 Addresses) </sup>
-    %hr
-    %span.breadcrumb= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
-    %span /
-    %span.breadcrumb Rich List
-    %br
+  %div.container.info
+    %div.section-info.clearfix
+      %h1.white Richest Addresses <sup> (Top 25 Addresses) </sup>
+      %ul.breadcrumb
+        %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
+        %li Rich List
+
 %div.col-lg-12
   = form_tag(richlist_path, :method => 'get', :enforce_utf8 => false) do
     %div.col-sm-9.clearfix

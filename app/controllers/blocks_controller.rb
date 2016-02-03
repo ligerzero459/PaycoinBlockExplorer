@@ -1,10 +1,11 @@
 class BlocksController < ApplicationController
   helper_method :totalOut, :confirmations, :maxBlocks
-  helper_method :getInputAddress
+  helper_method :getInputAddress, :getAnnouncements
 
   # GET /blocks
   def index
     @blocks = Block.order(:height).reverse.limit(30)
+    getAnnouncements
   end
 
   # GET /blocks/{hash}
@@ -33,6 +34,11 @@ class BlocksController < ApplicationController
     puts input.outputTransactionId
     puts input.vout
     Output.where(:transaction_id => input.outputTransactionId, :n => input.vout).get(:address)
+  end
+
+  def getAnnouncements
+    @announcements = Announcement.where(:active => true)
+    puts @announcements
   end
 
   private

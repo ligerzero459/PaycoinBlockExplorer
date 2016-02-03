@@ -15,7 +15,6 @@ body {
   background: url("/assets/dbg.jpg") repeat;
   color: #646464;
   border: none;
-  padding-top: 95px;
 }
 a {
   color: #646464;
@@ -2146,18 +2145,19 @@ ul.tickets li.ticket .content .date {
     z-index: 2;
   }
 
-  .container .info {
+  .container.info {
     width: 100%!important;
     margin: 0 auto;
     padding: 0 50px;
-    max-width: 1800px;
+    max-width: 1920px;
   }
 
   .section-info {
+    margin-top: 30px;
     margin-bottom: 40px;
   }
 
-  .section-info .h1 {
+  .section-info h1 {
     display: inline-block;
     float: left;
     margin: 0 0 10px;
@@ -2380,4 +2380,10 @@ ul.tickets li.ticket .content .date {
   padding-left: 15px;
   float: right;
   width: 100%;
+}
+
+.exception {
+  color: #999;
+  font-style: italic;
+  font-size: 12px;
 }

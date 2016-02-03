@@ -6,11 +6,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'blocks#index'
 
-  get 'blocks' => redirect('/')
-  get 'blocks/:id' => 'blocks#show'
+  get 'block' => redirect('/')
+  get 'block/:id' => 'blocks#show'
   get 'tx/:txid' => 'transactions#show'
-  get 'searches/index' => 'searches#index', as: 'search'
+  get 'search/index' => 'searches#index', as: 'search'
   get 'richlist' => 'rich_lists#index', as: 'richlist'
+  get 'address/:address' => 'addresses#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

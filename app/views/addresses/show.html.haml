@@ -1,0 +1,33 @@
+- content_for :title do
+  PBE Address - #{@address.address}
+%div.container.info
+  %div.section-info.clearfix
+    %h1.pull-left.white
+      %span Paycoin Address
+    %ul.breadcrumb
+      %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
+      %li Address: #{@address.address}
+%div.container.info
+  %div.row{:id => 'transaction-info'}
+    %div.col-lg-12
+      %div.panel
+        %div.panel-body
+          %div.dl-horizontal
+            %div.clearfix
+              %dt Hash
+              %dd #{@address.address}
+            %div.clearfix
+              %dt Balance
+              %dd #{'%.8f' % @address.balance} XPY
+            %div.clearfix
+              %dt Total Recieved
+              %dd (placeholder)
+            %div.clearfix
+              %dt Total Sent
+              %dd (placeholder)
+            %div.clearfix
+              %dt Transactions
+              %dd (placeholder)
+            %div.clearfix
+              %dt Unconfirmed
+              %dd 0.00000000 XPY

@@ -1,7 +1,17 @@
 %div.col-lg-12.row
-  %div.container
-    %h1.white Latest Paycoin Blocks
-    %hr
+  %div.container.info
+    %div.section-info.clearfix
+      %h1.white Latest Paycoin Blocks
+
+-if @announcements != nil
+  - @announcements.each do |announcement|
+    %div.col-lg-12.row
+      %div.col-lg-2.clearfix
+      %div.col-lg-8.clearfix
+        .alert{:class => 'alert-dismissable alert-info', role: 'alert', "data-dismiss" => 'alert' }
+          %button.close{ :type => 'button', :data => { :dismiss => 'alert' } } x
+          #{announcement.announcement}
+      %div.col-lg-2.clearfix
 
 %div.col-lg-12
   %div.col-lg-2.clearfix
@@ -27,7 +37,7 @@
         %tbody
           - @blocks.each do |block|
             %tr
-              %td= link_to block.height.to_s, 'blocks/' << block.blockHash.to_s
+              %td= link_to block.height.to_s, 'block/' << block.blockHash.to_s
               %td
                 = block.blockHash.to_s
               %td

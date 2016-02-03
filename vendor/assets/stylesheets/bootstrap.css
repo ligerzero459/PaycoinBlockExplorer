@@ -851,19 +851,19 @@ pre code {
 
 @media (min-width: 768px) {
   .container {
-    width: 970px;
+    width: 100%;
   }
 }
 
 @media (min-width: 992px) {
   .container {
-    width: 1170px;
+    width: 100%;
   }
 }
 
 @media (min-width: 1280px) {
   .container {
-    width: 1275px;
+    width: 100%;
   }
 }
 
@@ -1106,7 +1106,6 @@ pre code {
 .col-lg-12 {
   position: relative;
   min-height: 1px;
-  padding-right: 15px;
   padding-left: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -4140,6 +4139,7 @@ input[type="button"].btn-block {
   -moz-border-radius: 0 50px 50px;
   border-radius: 0 50px 50px;
   -o-border-radius: 0 50px 50px;
+  background: #e5e5e5;
   background-color: rgba(5,63,84,.9);
 }
 
@@ -4571,7 +4571,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 20px;
   border: 1px solid transparent;
 }
 
@@ -5605,8 +5604,8 @@ a.thumbnail.active {
 
 .alert-info {
   color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
+  background-color: #c0f2f7;
+  border-color: #93d7f1;
 }
 
 .alert-info hr {
