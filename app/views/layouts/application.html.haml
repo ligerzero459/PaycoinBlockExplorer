@@ -22,16 +22,16 @@
   %body
     .navbar.navbar-default.navbar-fixed-top{:style => "background: none; background-color: #119EC1;"}
       .container
-        .navbar-header{:style => "width: 20%;"}
+        .navbar-header
           .navbar-brand
-            = link_to image_tag("logo.png", height: '85'), "/"
-        .navbar-collapse.collapse{:style => "float: right; width: 80%;"}
-          %ul.nav.navbar-nav{:style => "float: left; width: 65%"}
-            %li.navbar-btn{:style => "height: 85px; width: 150px; padding-top: 20px;"}
+            = link_to image_tag("logo.png"), "/"
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li.navbar-btn
               = link_to 'Rich List', '/richlist', {:style=>"color: #ffffff"}
-            %li.navbar-btn{:style => "height: 80px; width: 150px; padding-top: 20px;"}
-          %ul.nav.navbar-nav{:style => "float: right; width: 35%"}
-            %li.navbar-btn{:style => "height: 80px; width: 100%; padding-top: 20px;"}
+            %li.navbar-btn
+          %ul.nav.navbar-nav.search
+            %li.search-box
               %div.search-home
                 = form_tag(search_path, :method => "get", :enforce_utf8 => false) do
                   %div.input-group

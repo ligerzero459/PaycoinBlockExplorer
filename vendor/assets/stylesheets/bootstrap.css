@@ -4797,9 +4797,64 @@ textarea.input-group-sm > .input-group-btn > .btn {
   text-decoration: none;
 }
 
+@media (max-width: 768px) {
+
+  .navbar-collapse {
+    border-top: none;
+    box-shadow: none;
+  }
+
+  .navbar-collapse .search {
+    float: right;
+    margin: 0px;
+    width: 100%;
+  }
+
+  .nav > li {
+    display: inline-block;
+  }
+
+  .navbar .navbar-brand {
+    margin: auto;
+    display: block;
+  }
+
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    display: block;
+  }
+}
+
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand {
     margin-left: -15px;
+  }
+
+  .navbar-collapse .search-box {
+    float: right;
+    width: 100%;
+    margin: auto;
+  }
+
+  .navbar-collapse .search {
+    float: right;
+    width: 40%;
+    height: 111px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav > li {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 1460px) {
+  .navbar > .container .navbar-brand {
+    margin-left: -15px;
+  }
+
+  .navbar .navbar-brand {
+    float: right;
   }
 }
 
