@@ -35,7 +35,7 @@
                 %span.exception Note: Unconfirmed balance is not included in the address balance.
           %div.col-sm-3.text-center.qrcode
             %div
-              - qr = generateQrCode(@address.address)
+              - qr = generate_qr_code(@address.address)
               = raw qr.as_svg(module_size: 6)
             %div
               = link_to 'Send Paycoin', 'paycoin:' + @address.address, {:class => 'btn btn-primary'}
@@ -49,15 +49,10 @@
               %div.col-sm-12.address-tx
                 =link_to tx.txid, '/tx/' << tx.txid
             %div.row.block-info-content.addresses
-              - block = blockFind(tx.txid)
-              - confirmations = addressConfirmations(tx.txid)
-              %div.col-sm-3.from-row-tx
+              - confirmations = address_confirmations(tx.txid)
+              %div.col-sm-4.from-row-tx
                 %h5 Amount: #{'%.6f' % tx.value}
-              %div.col-sm-3.block-row-tx
-                %h5
-                  Block:
-                  = link_to block.height.to_s, '/block/' + block.blockHash
-              %div.col-sm-3.to-row-tx
+              %div.col-sm-4.to-row-tx
                 %h5 Confirmations: #{confirmations}
-              %div.col-sm-3.balance-row-tx
+              %div.col-sm-4.balance-row-tx
                 %h5 Balance: #{'%.6f' % tx.balance}

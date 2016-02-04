@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  helper_method :generateQrCode, :addressConfirmations, :blockFind
+  helper_method :generate_qr_code, :address_confirmations, :block_find
 
   # GET /addresses
   # GET /addresses.json
@@ -15,13 +15,13 @@ class AddressesController < ApplicationController
                   .select_append{sum(:value).as(value)}
                   .select_append{max(:balance).as(balance)}
                   .where(:address => params[:address], :type => 'output')
-                  .group(:txid, :type)
+                  .group(:txid, :type).order(Sequel.desc(:id)).limit(15)
                   .union(Ledger.select(:id, :txid, :address, :type)
                              .select_append{sum(:value).as(value)}
                              .select_append{max(:balance).as(balance)}
                              .where(:address => params[:address], :type => 'input')
                              .group(:txid, :type)
-                  ).order(Sequel.desc(:id)).limit(30)
+                  ).order(Sequel.desc(:id)).limit(15)
 
     @sent = (Ledger.where(:address => params[:address], :type => 'input').sum(:value))
     if @sent != nil
@@ -32,18 +32,17 @@ class AddressesController < ApplicationController
     @received = Ledger.where(:address => params[:address], :type => 'output').sum(:value).round(6)
   end
 
-  def generateQrCode(address)
+  def generate_qr_code(address)
     qr = RQRCode::QRCode.new('paycoin:' + address.to_s)
     qr
   end
 
-  def addressConfirmations(txid)
+  def address_confirmations(txid)
     block_id = (Transaction.find(:txid => txid)).block_id
     Block.where{id >= block_id }.count
   end
 
-  def blockFind(txid)
-    block_id = (Transaction.find(:txid => txid)).block_id
+  def block_find(block_id)
     Block.find(:id => block_id)
   end
 
