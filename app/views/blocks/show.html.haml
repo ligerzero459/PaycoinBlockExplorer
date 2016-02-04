@@ -89,7 +89,7 @@
         - @block.transactions.order(Sequel.asc(:id)).each do |tx|
           %div.panel
             %div.panel-body.clearfix
-              %div.block-info-tx.col-sm-12.clearfix{:style => "padding-left: 15px; padding-bottom: 10px;"}
+              %div.block-info-tx.col-sm-12
                 - if tx.coinbase == true
                   %span.coinbase
                     Coinbase
@@ -112,7 +112,7 @@
                           Coinstake Transaction
                         - else
                           Newly Generated Coins
-                    %div.col-xs-6.to
+                    %div.col-xs-6.block-info-content.to
                       -tx.outputs.each do |output|
                         %span
                           %div.clearfix

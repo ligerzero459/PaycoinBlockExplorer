@@ -48,7 +48,7 @@
             %div.row.block-info-tx
               %div.col-sm-12.address-tx
                 =link_to tx.txid, '/tx/' << tx.txid
-            %div.row.block-info-content
+            %div.row.block-info-content.addresses
               - block = blockFind(tx.txid)
               - confirmations = addressConfirmations(tx.txid)
               %div.col-sm-3.from-row-tx

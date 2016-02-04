@@ -3,16 +3,26 @@
   %div.col-lg-2.clearfix
 
   %div.col-lg-8
+    %div.container.info
+      %div.section-info.clearfix
+        %h1.text-center.white
+          %span Search Results
     %div.panel
-      %table.table
-        %tbody
-          - @results.each_with_index do |res, index|
-            %tr
-              - if res.type == 'block'
-                %td Block #{res.height}
-                %td= link_to res.resHash, '/block/' << res.resHash.to_s
-              - elsif res.type == 'transaction'
-                %td Transaction
-                %td= link_to res.resHash, '/tx/' << res.resHash
+      - if @results.count == 0
+        %h5.text-center No matching results.
+      - else
+        %table.table
+          %tbody
+            - @results.each_with_index do |res, index|
+              %tr
+                - if res.type == 'block'
+                  %td Block #{res.height}
+                  %td= link_to res.resHash, '/block/' << res.resHash.to_s
+                - elsif res.type == 'transaction'
+                  %td Transaction
+                  %td= link_to res.resHash, '/tx/' << res.resHash
+                - elsif res.type == 'address'
+                  %td Address
+                  %td= link_to res.resHash, '/address/' << res.resHash
 
   %div.col-lg-2.clearfix

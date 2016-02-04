@@ -966,24 +966,30 @@ pre code {
   width: 100%;
 }
 
-.block_info_content .from-amount,
-.block_info_content .spent,
-.block_info_content .to,
-.block_info_fee,
-.block_info_tx .address-tx,
-.block_info_tx .block-tx,
-.block_info_tx_sum {
+.block-info-content .from-amount,
+.block-info-content .spent,
+.block-info-content .to,
+.block-info-fee,
+.block-info-tx .address-tx,
+.block-info-tx .block-tx,
+.block-info-tx_sum {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .block-info-content {
-  border-top: 1px solid #dedede;
   margin: 10px 0 0;
   padding-top: 10px;
 }
 
 .block-info-content .addresses {
+  border-top: 1px solid #dedede;
+  margin: 10px 0 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.block-info-content.addresses {
   border-top: 1px solid #dedede;
   margin: 10px 0 0;
   padding-top: 10px;
@@ -1002,17 +1008,21 @@ pre code {
   border-radius: 0
 }
 
-.block-info-content .to,
-.block-info-content .from {
+.block-info-content.to,
+.block-info-content.from {
   display: table-cell;
   float: none;
   width: 50%;
 }
 
-.block-info-content .to{
+.block-info-content.to{
   border-left: 1px solid #E6E6E6;
   position: relative;
   vertical-align: bottom;
+}
+
+.block-info-content.from{
+  padding-right: 10px;
 }
 
 .block-info-content .spent {
