@@ -867,9 +867,9 @@ pre code {
   }
 }
 
-@media (min-width: 1680px) {
+@media (min-width: 1460px) {
   .container {
-    width: 1675px;
+    width: 1459px;
   }
 }
 
@@ -920,6 +920,10 @@ pre code {
   text-overflow: ellipsis;
 }
 
+.info.container #address-info .qrcode {
+  margin-top: 20px;
+}
+
 @media (max-width: 768px) {
   .row {
     width: 100%;
@@ -928,7 +932,7 @@ pre code {
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 1460px) and (min-width: 768px) {
   .row {
     width: 100%;
     margin-right: 0px;
@@ -936,8 +940,16 @@ pre code {
   }
 }
 
-@media (min-width: 1680px) {
+@media (min-width: 1460px) {
   .row {
+    width: 100%;
+  }
+
+  .info.container #address-info,
+  .info.container #block-info,
+  .info.container #transaction-info {
+    float: left;
+    margin-right: 3%;
     width: 40%;
   }
 }
@@ -952,6 +964,23 @@ pre code {
 .block-info-content {
   display: table;
   width: 100%;
+}
+
+.block_info_content .from-amount,
+.block_info_content .spent,
+.block_info_content .to,
+.block_info_fee,
+.block_info_tx .address-tx,
+.block_info_tx .block-tx,
+.block_info_tx_sum {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.block-info-content {
+  border-top: 1px solid #dedede;
+  margin: 10px 0 0;
+  padding-top: 10px;
 }
 
 .block-info-content .addresses {
@@ -1026,9 +1055,9 @@ pre code {
   }
 }
 
-@media (min-width: 1680px) {
+@media (min-width: 1460px) {
   .wide-position {
-    width: 60%;
+    width: 57%;
     padding-left: 10px;
   }
 }
@@ -1040,6 +1069,7 @@ pre code {
   display: inline-block;
   font-weight: 700;
   line-height: 10px;
+  margin-bottom: 10px;
 }
 
 .coinbase,
@@ -1331,6 +1361,12 @@ pre code {
 }
 
 @media (min-width: 768px) {
+  .info.container #address-info .address-numbers,
+  .info.container #address-info .qrcode {
+    width: 100%;
+    padding-left: 0px;
+  }
+
   .col-sm-1,
   .col-sm-2,
   .col-sm-3,

@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  helper_method :generateQrCode, :addressConfirmations, :blockFind
 
   # GET /addresses
   # GET /addresses.json
@@ -10,55 +11,40 @@ class AddressesController < ApplicationController
   # GET /addresses/1.json
   def show
     @address = Address.find(:address => params[:address])
-  end
+    @ledger = Ledger.select(:id, :txid, :address, :type)
+                  .select_append{sum(:value).as(value)}
+                  .select_append{max(:balance).as(balance)}
+                  .where(:address => params[:address], :type => 'output')
+                  .group(:txid, :type)
+                  .union(Ledger.select(:id, :txid, :address, :type)
+                             .select_append{sum(:value).as(value)}
+                             .select_append{max(:balance).as(balance)}
+                             .where(:address => params[:address], :type => 'input')
+                             .group(:txid, :type)
+                  ).order(Sequel.desc(:id))
 
-  # GET /addresses/new
-  def new
-    @address = Address.new
-  end
-
-  # GET /addresses/1/edit
-  def edit
-  end
-
-  # POST /addresses
-  # POST /addresses.json
-  def create
-    @address = Address.new(address_params)
-
-    respond_to do |format|
-      if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
-        format.json { render :show, status: :created, location: @address }
-      else
-        format.html { render :new }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
-      end
+    @sent = (Ledger.where(:address => params[:address], :type => 'input').sum(:value))
+    if @sent != nil
+      @sent = @sent.abs.round(6)
+    else
+      @sent = 0
     end
+    @received = Ledger.where(:address => params[:address], :type => 'output').sum(:value).round(6)
   end
 
-  # PATCH/PUT /addresses/1
-  # PATCH/PUT /addresses/1.json
-  def update
-    respond_to do |format|
-      if @address.update(address_params)
-        format.html { redirect_to @address, notice: 'Address was successfully updated.' }
-        format.json { render :show, status: :ok, location: @address }
-      else
-        format.html { render :edit }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
-      end
-    end
+  def generateQrCode(address)
+    qr = RQRCode::QRCode.new('paycoin:' + address.to_s)
+    qr
   end
 
-  # DELETE /addresses/1
-  # DELETE /addresses/1.json
-  def destroy
-    @address.destroy
-    respond_to do |format|
-      format.html { redirect_to addresses_url, notice: 'Address was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  def addressConfirmations(txid)
+    block_id = (Transaction.find(:txid => txid)).block_id
+    Block.where{id >= block_id }.count
+  end
+
+  def blockFind(txid)
+    block_id = (Transaction.find(:txid => txid)).block_id
+    Block.find(:id => block_id)
   end
 
   private

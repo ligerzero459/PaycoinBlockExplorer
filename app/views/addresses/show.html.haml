@@ -8,26 +8,56 @@
       %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
       %li Address: #{@address.address}
 %div.container.info
-  %div.row{:id => 'transaction-info'}
-    %div.col-lg-12
+  %div.row{:id => 'address-info'}
+    %div.col-sm-12
       %div.panel
         %div.panel-body
-          %div.dl-horizontal
-            %div.clearfix
-              %dt Hash
-              %dd #{@address.address}
-            %div.clearfix
-              %dt Balance
-              %dd #{'%.8f' % @address.balance} XPY
-            %div.clearfix
-              %dt Total Recieved
-              %dd (placeholder)
-            %div.clearfix
-              %dt Total Sent
-              %dd (placeholder)
-            %div.clearfix
-              %dt Transactions
-              %dd (placeholder)
-            %div.clearfix
-              %dt Unconfirmed
-              %dd 0.00000000 XPY
+          %div.address-numbers.col-sm-9
+            %div.dl-horizontal
+              %div.clearfix
+                %dt Hash
+                %dd #{@address.address}
+              %div.clearfix
+                %dt Balance
+                %dd{:style => "font-weight: bold;"} #{'%.8f' % @address.balance} XPY
+              %div.clearfix
+                %dt Total Received
+                %dd #{'%.8f' % @received.to_s} XPY
+              %div.clearfix
+                %dt Total Sent
+                %dd #{'%.8f' % @sent.to_s} XPY
+              %div.clearfix
+                %dt Transactions
+                %dd #{@ledger.count}
+              %div.clearfix
+                %dt Unconfirmed
+                %dd 0.00000000 XPY
+                %span.exception Note: Unconfirmed balance is not included in the address balance.
+          %div.col-sm-3.text-center.qrcode
+            %div
+              - qr = generateQrCode(@address.address)
+              = raw qr.as_svg(module_size: 6)
+            %div
+              = link_to 'Send Paycoin', 'paycoin:' + @address.address, {:class => 'btn btn-primary'}
+  %div.wide-position
+    %div.row{:id => 'address_info_tx'}
+      %div.col-lg-12
+        - @ledger.each do |tx|
+          %div.clearfix{:class => 'panel' + (tx.type == 'input' ? ' negative' : '')}
+            %span.glyphicon
+            %div.row.block-info-tx
+              %div.col-sm-12.address-tx
+                =link_to tx.txid, '/tx/' << tx.txid
+            %div.row.block-info-content
+              - block = blockFind(tx.txid)
+              - confirmations = addressConfirmations(tx.txid)
+              %div.col-sm-3.from-row-tx
+                %h5 Amount: #{'%.6f' % tx.value}
+              %div.col-sm-3.block-row-tx
+                %h5
+                  Block:
+                  = link_to block.height.to_s, '/block/' + block.blockHash
+              %div.col-sm-3.to-row-tx
+                %h5 Confirmations: #{confirmations}
+              %div.col-sm-3.balance-row-tx
+                %h5 Balance: #{'%.6f' % tx.balance}

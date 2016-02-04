@@ -2193,6 +2193,21 @@ ul.tickets li.ticket .content .date {
     position: relative;
     z-index: 2;
   }
+
+  .section-info {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .section-info h1 {
+    display: inline-block;
+    float: left;
+    margin: 0 0 10px;
+    padding-left: 15px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cdcdcd;
+  }
 }
 /* Higher than 980 (desktop devices)
 ====================================================================== */
@@ -2202,6 +2217,21 @@ ul.tickets li.ticket .content .date {
   }
   .sidebar-nav > ul {
     margin: 20px -30px 0 -30px !important;
+  }
+
+  .section-info {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .section-info h1 {
+    display: inline-block;
+    float: left;
+    margin: 0 0 10px;
+    padding-left: 15px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cdcdcd;
   }
 }
 /* Higher than 768 (desktop devices and tablets)
@@ -2214,6 +2244,21 @@ ul.tickets li.ticket .content .date {
   }
   .container {
     width: 100%;
+  }
+
+  .section-info {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .section-info h1 {
+    display: inline-block;
+    float: left;
+    margin: 0 0 10px;
+    padding-left: 15px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cdcdcd;
   }
 }
 /* Tablet Portrait (devices and browsers)
@@ -2288,6 +2333,21 @@ ul.tickets li.ticket .content .date {
     position: relative;
     z-index: 2;
   }
+
+  .section-info {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .section-info h1 {
+    display: inline-block;
+    float: left;
+    margin: 0 0 10px;
+    padding-left: 15px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cdcdcd;
+  }
 }
 /* All Mobile Sizes (devices and browser)
 ====================================================================== */
@@ -2327,6 +2387,21 @@ ul.tickets li.ticket .content .date {
   .sidebar-nav {
     margin: -22px 0 30px 0;
   }
+
+  .section-info {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .section-info h1 {
+    display: inline-block;
+    float: left;
+    margin: 0 0 10px;
+    padding-left: 15px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cdcdcd;
+  }
 }
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers)
 ====================================================================== */
@@ -2345,6 +2420,21 @@ ul.tickets li.ticket .content .date {
     padding: 10px 20px;
     position: relative;
     z-index: 2;
+  }
+
+  .section-info {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .section-info h1 {
+    display: inline-block;
+    float: left;
+    margin: 0 0 10px;
+    padding-left: 15px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cdcdcd;
   }
 }
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers)
@@ -2372,6 +2462,21 @@ ul.tickets li.ticket .content .date {
     position: relative;
     z-index: 2;
   }
+
+  .section-info {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .section-info h1 {
+    display: inline-block;
+    float: left;
+    margin: 0 0 10px;
+    padding-left: 15px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cdcdcd;
+  }
 }
 
 .search-box {
@@ -2386,4 +2491,97 @@ ul.tickets li.ticket .content .date {
   color: #999;
   font-style: italic;
   font-size: 12px;
+}
+
+#address_info_tx .panel,
+#block_info_tx .panel,
+#transaction_info_tx .panel {
+  padding: 20px 15px;
+  margin-bottom: 10px;
+  position: relative;
+  border: none;
+  border-bottom: 2px solid rgba(14,44,68,.4);
+  border-top: 1px solid rgba(14,44,68,.2);
+  -webkit-box-shadow: 0!important;
+  -moz-box-shadow: 0!important;
+  -ms-box-shadow: 0!important;
+  -o-box-shadow: 0!important;
+  box-shadow: 0!important;
+}
+
+#address_info_tx .panel {
+  border-bottom: 2px solid #88c0a3;
+  border-top: 1px solid #E8F2ED;
+}
+
+#address_info_tx .panel.negative, .unn#transaction_info_tx .panel {
+  border-bottom: 2px solid #d08e8e;
+  border-top: 1px solid #F2D7D7;
+}
+
+.address_info_tree .panel {
+  padding: 8px;
+  margin: 0;
+  overflow: hidden;
+  max-height: 60px;
+}
+
+.address_info_tree .txs-center .panel {
+  padding: 17px 8px;
+}
+
+.address_info_tree .txs-from,
+.address_info_tree .txs-to {
+  position: relative;
+  border-bottom: 2px solid #88c0a3;
+  border-top: 1px solid #E8F2ED;
+}
+
+.address_info_tree .txs-to {
+  border-bottom: 2px solid #d08e8e;
+  border-top: 1px solid #F2D7D7;
+}
+
+#address_info_tx .panel>.glyphicon, .unn#transaction_info_tx .panel>.glyphicon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: -2px;
+  width: 5px;
+  background-color: #bcdfcd;
+  border-bottom: 2px solid #88c0a3;
+}
+
+#address_info_tx .panel.negative .glyphicon, .unn#transaction_info_tx .panel .glyphicon {
+  background-color: #eab8b8;
+  border-bottom: 2px solid #d08e8e;
+}
+
+#address_info_tx .panel .from-row-tx {
+  color: #6aa888;
+}
+
+#address_info_tx .panel.negative .from-row-tx,
+.unn#transaction_info_tx .from-row-tx {
+  color: #ae6a6a;
+}
+
+#address_info_tx .block-info-content>div,
+#address_info_tx .from-row,
+.address_info_tree .from-row,
+.unn .from-row,
+.unn#transaction_info_tx .block-info-content>div {
+  padding-left: 0;
+}
+
+.btn-group-vertical>.btn-group:after,
+.btn-toolbar:after,
+.clearfix:after, .container:after,
+.dropdown-menu>li>a,
+.form-horizontal .form-group:after,
+.modal-footer:after,
+.nav:after, .navbar-collapse:after,
+.navbar-header:after, .pager:after,
+.panel, .panel-body:after, .row:after {
+  clear: both;
 }
