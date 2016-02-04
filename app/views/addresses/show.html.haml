@@ -1,12 +1,12 @@
 - content_for :title do
-  PBE Address - #{@address.address}
+  PBE Address - #{@address_data.address.address}
 %div.container.info
   %div.section-info.clearfix
     %h1.pull-left.white
       %span Paycoin Address
     %ul.breadcrumb
       %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
-      %li Address: #{@address.address}
+      %li Address: #{@address_data.address.address}
 %div.container.info
   %div.row{:id => 'address-info'}
     %div.col-sm-12
@@ -16,16 +16,16 @@
             %div.dl-horizontal
               %div.clearfix
                 %dt Hash
-                %dd #{@address.address}
+                %dd #{@address_data.address.address}
               %div.clearfix
                 %dt Balance
-                %dd{:style => "font-weight: bold;"} #{'%.8f' % @address.balance} XPY
+                %dd{:style => "font-weight: bold;"} #{'%.8f' % @address_data.address.balance} XPY
               %div.clearfix
                 %dt Total Received
-                %dd #{'%.8f' % @received.to_s} XPY
+                %dd #{'%.8f' % @address_data.received.to_s} XPY
               %div.clearfix
                 %dt Total Sent
-                %dd #{'%.8f' % @sent.to_s} XPY
+                %dd #{'%.8f' % @address_data.sent.to_s} XPY
               %div.clearfix
                 %dt Transactions
                 %dd #{@ledger.count}
@@ -35,10 +35,10 @@
                 %span.exception Note: Unconfirmed balance is not included in the address balance.
           %div.col-sm-3.text-center.qrcode
             %div
-              - qr = generate_qr_code(@address.address)
+              - qr = generate_qr_code(@address_data.address.address)
               = raw qr.as_svg(module_size: 6)
             %div
-              = link_to 'Send Paycoin', 'paycoin:' + @address.address, {:class => 'btn btn-primary'}
+              = link_to 'Send Paycoin', 'paycoin:' + @address_data.address.address, {:class => 'btn btn-primary'}
   %div.wide-position
     %div.row{:id => 'address_info_tx'}
       %div.col-lg-12
@@ -47,12 +47,16 @@
             %span.glyphicon
             %div.row.block-info-tx
               %div.col-sm-12.address-tx
-                =link_to tx.txid, '/tx/' << tx.txid
+                %code
+                  =link_to tx.txid, '/tx/' << tx.txid
             %div.row.block-info-content.addresses
-              - confirmations = address_confirmations(tx.txid)
-              %div.col-sm-4.from-row-tx
+              %div.col-sm-3.from-row-tx
                 %h5 Amount: #{'%.6f' % tx.value}
-              %div.col-sm-4.to-row-tx
-                %h5 Confirmations: #{confirmations}
-              %div.col-sm-4.balance-row-tx
+              %div.col-sm-3.to-row-tx
+                %h5
+
+                  = link_to 'Block: ' + tx.to_hash[:height].to_s, '/blocks/' + tx.to_hash[:blockHash]
+              %div.col-sm-3.to-row-tx
+                %h5 Confirmations: #{@address_data.max_block-tx.to_hash[:height]}
+              %div.col-sm-3.balance-row-tx
                 %h5 Balance: #{'%.6f' % tx.balance}

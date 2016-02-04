@@ -10,31 +10,36 @@ class AddressesController < ApplicationController
   # GET /addresses/1
   # GET /addresses/1.json
   def show
-    @address = Address.find(:address => params[:address])
-    @ledger = Ledger.select(:id, :txid, :address, :type)
-                  .select_append{sum(:value).as(value)}
-                  .select_append{max(:balance).as(balance)}
-                  .where(:address => params[:address], :type => 'output')
-                  .group(:txid, :type).order(Sequel.desc(:id)).limit(15)
-                  .union(Ledger.select(:id, :txid, :address, :type)
-                             .select_append{sum(:value).as(value)}
-                             .select_append{max(:balance).as(balance)}
-                             .where(:address => params[:address], :type => 'input')
-                             .group(:txid, :type)
-                  ).order(Sequel.desc(:id)).limit(15)
-
-    @sent = (Ledger.where(:address => params[:address], :type => 'input').sum(:value))
-    if @sent != nil
-      @sent = @sent.abs.round(6)
+    temp = OpenStruct.new
+    temp.address = Address.find(:address => params[:address])
+    @ledger = Ledger.join(:transactions, :txid=>:txid)
+                  .join(:blocks, :id=>:transactions__block_id)
+                  .select(:ledger__id, :blocks__blockHash, :blocks__height, :ledger__txid, :ledger__address, :ledger__type)
+                  .select_append{sum(:ledger__value).as(value)}
+                  .select_append{max(:ledger__balance).as(balance)}
+                  .where(:ledger__address => params[:address], :ledger__type => 'output')
+                  .group(:ledger__txid, :ledger__type).order(Sequel.desc(:id))
+                  .union(Ledger.join(:transactions, :txid=>:txid)
+                             .join(:blocks, :id=>:transactions__block_id)
+                             .select(:ledger__id, :blocks__blockHash, :blocks__height, :ledger__txid, :ledger__address, :ledger__type)
+                             .select_append{sum(:ledger__value).as(value)}
+                             .select_append{max(:ledger__balance).as(balance)}
+                             .where(:ledger__address => params[:address], :ledger__type => 'input')
+                             .group(:ledger__txid, :ledger__type)
+                  ).order(Sequel.desc(:id))
+    temp.max_block = Block.max(:height)
+    temp.sent = (Ledger.where(:address => params[:address], :type => 'input').sum(:value))
+    if temp.sent != nil
+      temp.sent = temp.sent.abs.round(6)
     else
-      @sent = 0
+      temp.sent = 0
     end
-    @received = Ledger.where(:address => params[:address], :type => 'output').sum(:value).round(6)
+    temp.received = Ledger.where(:address => params[:address], :type => 'output').sum(:value).round(6)
+    @address_data = temp
   end
 
   def generate_qr_code(address)
-    qr = RQRCode::QRCode.new('paycoin:' + address.to_s)
-    qr
+    RQRCode::QRCode.new('paycoin:' + address.to_s)
   end
 
   def address_confirmations(txid)

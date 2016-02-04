@@ -787,12 +787,17 @@ samp {
 }
 
 code {
-  padding: 2px 4px;
-  font-size: 90%;
+  padding: 3px 4px;
+  font-size: 95%;
   color: #c7254e;
   white-space: nowrap;
-  background-color: #f9f2f4;
+  background-color: #545253;
   border-radius: 4px;
+}
+
+code a, code a:hover, a .hash:hover, .table-hover>tbody>tr:hover code a, code a:visited {
+  color: #c7254e;
+  vertical-align: middle;
 }
 
 pre {

@@ -39,7 +39,8 @@
             %tr
               %td= link_to block.height.to_s, 'block/' << block.blockHash.to_s
               %td
-                = block.blockHash.to_s
+                %code
+                  = block.blockHash.to_s
               %td
                 = (block.transactions.length).to_s
               %td

@@ -24,7 +24,9 @@
                   = link_to image_tag("next-arrow-2.png", height: '13'), @block.nextBlockHash
             %div
               %dt Block Hash
-              %dd #{@block.blockHash}
+              %dd
+                %code
+                  #{@block.blockHash}
             %div
               %dt Block Time
               %dd
@@ -56,14 +58,16 @@
               %dt Previous block hash
               %dd
                 - if @block.previousBlockHash != nil
-                  = link_to @block.previousBlockHash, @block.previousBlockHash
+                  %code
+                    = link_to @block.previousBlockHash, @block.previousBlockHash
                 - else
                   #{''}
             %div.clearfix
               %dt Next block hash
               %dd
                 - if (@block.nextBlockHash != nil)
-                  = link_to @block.nextBlockHash, @block.nextBlockHash
+                  %code
+                    = link_to @block.nextBlockHash, @block.nextBlockHash
                 - else
                   #{''}
             %div
