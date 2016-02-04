@@ -214,7 +214,6 @@ h6 {
   -webkit-box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
-  position: relative;
   z-index: 2;
 }
 .navbar a {
@@ -2354,7 +2353,7 @@ ul.tickets li.ticket .content .date {
 ====================================================================== */
 @media only screen and (max-width: 767px) {
   body {
-    padding-top: 0px;
+    padding-top: 260px;
   }
   .header-nav {
     margin-right: 40px;
