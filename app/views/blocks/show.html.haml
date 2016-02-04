@@ -7,7 +7,7 @@
       %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
       %li Block: #{@block.height.to_s}
 
-  %div.row
+  %div.row{:id => 'block-info'}
     %div.col-lg-12
       %div.panel.clearfix
         %div.panel-body{:style => "padding-left: 35px; padding-right: 35px;"}
@@ -89,7 +89,7 @@
         - @block.transactions.order(Sequel.asc(:id)).each do |tx|
           %div.panel
             %div.panel-body.clearfix
-              %div.block-info-tx.col-sm-12.clearfix{:style => "padding-left: 15px; padding-bottom: 10px;"}
+              %div.block-info-tx.col-sm-12
                 - if tx.coinbase == true
                   %span.coinbase
                     Coinbase
@@ -112,7 +112,7 @@
                           Coinstake Transaction
                         - else
                           Newly Generated Coins
-                    %div.col-xs-6.to
+                    %div.col-xs-6.block-info-content.to
                       -tx.outputs.each do |output|
                         %span
                           %div.clearfix

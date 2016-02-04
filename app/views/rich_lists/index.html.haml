@@ -34,7 +34,8 @@
           - @rich_lists.each_with_index do |rich_list, position|
             %tr
               %td #{(position + 1).to_s}
-              %td #{rich_list.address}
+              %td
+                =link_to rich_list.address, '/address/' + rich_list.address
               %td
                 = "%.6f XPY" % rich_list.balance.round(6)
               %td

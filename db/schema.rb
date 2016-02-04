@@ -46,7 +46,21 @@ Sequel.migration do
       index [:address]
       index [:outputTransactionId]
       index [:transaction_id]
-      index [:transaction_id, :address], :name=>:transaction_id
+    end
+    
+    create_table(:ledger) do
+      primary_key :id, :type=>"int(11)"
+      column :transaction_id, "int(11)"
+      column :txid, "varchar(255)"
+      column :address, "varchar(255)"
+      column :value, "double"
+      column :type, "varchar(255)"
+      column :n, "int(11)"
+      column :balance, "double"
+      
+      index [:address]
+      index [:transaction_id]
+      index [:txid]
     end
     
     create_table(:outputs) do
@@ -60,7 +74,6 @@ Sequel.migration do
       
       index [:address]
       index [:transaction_id, :value]
-      index [:transaction_id, :address], :name=>:transaction_id
     end
     
     create_table(:outstanding_coins) do
@@ -86,10 +99,6 @@ Sequel.migration do
       index [:txid]
     end
     
-    create_table(:rich_lists) do
-      primary_key :id, :type=>"int(11)"
-    end
-    
     create_table(:schema_info) do
       column :version, "int(11)", :default=>0, :null=>false
     end
@@ -98,10 +107,6 @@ Sequel.migration do
       column :filename, "varchar(255)", :null=>false
       
       primary_key [:filename]
-    end
-    
-    create_table(:searches) do
-      primary_key :id, :type=>"int(11)"
     end
     
     create_table(:transactions) do
@@ -125,8 +130,6 @@ end
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20151214052225_create_transactions.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20151214052406_create_inputs.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20151214052419_create_outputs.rb')"
-self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160116181504_create_searches.rb')"
-self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160121043014_create_rich_lists.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160130173955_create_addresses.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160202030646_announcement.rb')"
                 end

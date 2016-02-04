@@ -45,6 +45,7 @@ html {
 
 body {
   margin: 0;
+  padding-top: 120px;
 }
 
 a {
@@ -867,9 +868,9 @@ pre code {
   }
 }
 
-@media (min-width: 1680px) {
+@media (min-width: 1460px) {
   .container {
-    width: 1675px;
+    width: 1459px;
   }
 }
 
@@ -920,6 +921,10 @@ pre code {
   text-overflow: ellipsis;
 }
 
+.info.container #address-info .qrcode {
+  margin-top: 20px;
+}
+
 @media (max-width: 768px) {
   .row {
     width: 100%;
@@ -928,7 +933,7 @@ pre code {
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 1460px) and (min-width: 768px) {
   .row {
     width: 100%;
     margin-right: 0px;
@@ -936,8 +941,16 @@ pre code {
   }
 }
 
-@media (min-width: 1680px) {
+@media (min-width: 1460px) {
   .row {
+    width: 100%;
+  }
+
+  .info.container #address-info,
+  .info.container #block-info,
+  .info.container #transaction-info {
+    float: left;
+    margin-right: 3%;
     width: 40%;
   }
 }
@@ -954,7 +967,30 @@ pre code {
   width: 100%;
 }
 
+.block-info-content .from-amount,
+.block-info-content .spent,
+.block-info-content .to,
+.block-info-fee,
+.block-info-tx .address-tx,
+.block-info-tx .block-tx,
+.block-info-tx_sum {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.block-info-content {
+  margin: 10px 0 0;
+  padding-top: 10px;
+}
+
 .block-info-content .addresses {
+  border-top: 1px solid #dedede;
+  margin: 10px 0 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.block-info-content.addresses {
   border-top: 1px solid #dedede;
   margin: 10px 0 0;
   padding-top: 10px;
@@ -973,17 +1009,21 @@ pre code {
   border-radius: 0
 }
 
-.block-info-content .to,
-.block-info-content .from {
+.block-info-content.to,
+.block-info-content.from {
   display: table-cell;
   float: none;
   width: 50%;
 }
 
-.block-info-content .to{
+.block-info-content.to{
   border-left: 1px solid #E6E6E6;
   position: relative;
   vertical-align: bottom;
+}
+
+.block-info-content.from{
+  padding-right: 10px;
 }
 
 .block-info-content .spent {
@@ -1026,9 +1066,9 @@ pre code {
   }
 }
 
-@media (min-width: 1680px) {
+@media (min-width: 1460px) {
   .wide-position {
-    width: 60%;
+    width: 57%;
     padding-left: 10px;
   }
 }
@@ -1040,6 +1080,7 @@ pre code {
   display: inline-block;
   font-weight: 700;
   line-height: 10px;
+  margin-bottom: 10px;
 }
 
 .coinbase,
@@ -1331,6 +1372,12 @@ pre code {
 }
 
 @media (min-width: 768px) {
+  .info.container #address-info .address-numbers,
+  .info.container #address-info .qrcode {
+    width: 100%;
+    padding-left: 0px;
+  }
+
   .col-sm-1,
   .col-sm-2,
   .col-sm-3,
@@ -4751,9 +4798,64 @@ textarea.input-group-sm > .input-group-btn > .btn {
   text-decoration: none;
 }
 
+@media (max-width: 768px) {
+
+  .navbar-collapse {
+    border-top: none;
+    box-shadow: none;
+  }
+
+  .navbar-collapse .search {
+    float: right;
+    margin: 0px;
+    width: 100%;
+  }
+
+  .nav > li {
+    display: inline-block;
+  }
+
+  .navbar .navbar-brand {
+    margin: auto;
+    display: block;
+  }
+
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    display: block;
+  }
+}
+
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand {
     margin-left: -15px;
+  }
+
+  .navbar-collapse .search-box {
+    float: right;
+    width: 100%;
+    margin: auto;
+  }
+
+  .navbar-collapse .search {
+    float: right;
+    width: 40%;
+    height: 111px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav > li {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 1460px) {
+  .navbar > .container .navbar-brand {
+    margin-left: -15px;
+  }
+
+  .navbar .navbar-brand {
+    float: right;
   }
 }
 
