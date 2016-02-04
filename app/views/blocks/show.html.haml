@@ -7,7 +7,7 @@
       %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
       %li Block: #{@block.height.to_s}
 
-  %div.row
+  %div.row{:id => 'block-info'}
     %div.col-lg-12
       %div.panel.clearfix
         %div.panel-body{:style => "padding-left: 35px; padding-right: 35px;"}
