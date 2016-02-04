@@ -21,7 +21,7 @@ class AddressesController < ApplicationController
                              .select_append{max(:balance).as(balance)}
                              .where(:address => params[:address], :type => 'input')
                              .group(:txid, :type)
-                  ).order(Sequel.desc(:id))
+                  ).order(Sequel.desc(:id)).limit(30)
 
     @sent = (Ledger.where(:address => params[:address], :type => 'input').sum(:value))
     if @sent != nil
