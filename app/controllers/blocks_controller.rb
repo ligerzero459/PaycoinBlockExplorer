@@ -1,11 +1,11 @@
 class BlocksController < ApplicationController
-  helper_method :totalOut, :confirmations, :maxBlocks
-  helper_method :getInputAddress, :getAnnouncements
+  helper_method :total_out, :confirmations, :max_blocks
+  helper_method :get_input_address, :get_announcements, :block_missing
 
   # GET /blocks
   def index
     @blocks = Block.order(:height).reverse.limit(15)
-    getAnnouncements
+    get_announcements
   end
 
   # GET /blocks/{hash}
@@ -14,31 +14,39 @@ class BlocksController < ApplicationController
   end
 
   # helpers
-  def totalOut(block)
-    total = 0.0
-    block.transactions.each do |tx|
-      total += tx.totalOutput
+  def total_out(block)
+    begin
+      total = 0.0
+      block.transactions.each do |tx|
+        total += tx.totalOutput
+      end
+      total.round(6)
+    rescue
+      not_found
     end
-    total.round(6)
   end
 
   def confirmations(block)
     Block.where{height >= block.height}.count
   end
 
-  def maxBlocks
+  def max_blocks
     Block.count
   end
 
-  def getInputAddress(input)
+  def get_input_address(input)
     puts input.outputTransactionId
     puts input.vout
     Output.where(:transaction_id => input.outputTransactionId, :n => input.vout).get(:address)
   end
 
-  def getAnnouncements
+  def get_announcements
     @announcements = Announcement.where(:active => true)
     puts @announcements
+  end
+
+  def block_missing
+    not_found
   end
 
   private

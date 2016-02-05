@@ -38,5 +38,7 @@ module PaycoinBlockExplorer
 
     config.assets.precompile << Proc.new { |path, fn| fn =~ /vendor\/assets/ && %w(.js .css .jpg .png).include?(File.extname(path)) }
 
+    require Rails.root.join("lib/custom_public_exceptions")
+    config.exceptions_app = CustomPublicExceptions.new(Rails.public_path)
   end
 end

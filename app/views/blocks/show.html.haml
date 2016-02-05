@@ -1,175 +1,178 @@
-- content_for :title do
-  PBE Block - #{@block.height.to_s}
-%div.container.info
-  %div.section-info.clearfix
-    %h1.pull-left.white Block
-    %ul.breadcrumb
-      %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
-      %li Block: #{@block.height.to_s}
+- if @block == nil
+  = block_missing
+- else
+  - content_for :title do
+    PBE Block - #{@block.height.to_s}
+  %div.container.info
+    %div.section-info.clearfix
+      %h1.pull-left.white Block
+      %ul.breadcrumb
+        %li= link_to 'Home', root_path, {:style=>"color: #428bcb;"}
+        %li Block: #{@block.height.to_s}
 
-  %div.row{:id => 'block-info'}
-    %div.col-lg-12
-      %div.panel.clearfix
-        %div.panel-body{:style => "padding-left: 35px; padding-right: 35px;"}
-          %h1 Block Info
-          %hr
-          %div.dl-horizontal
-            %div
-              %dt Height
-              %dd
-                - if @block.previousBlockHash != nil
-                  = link_to image_tag("prev-arrow-2.png", height: '13'), @block.previousBlockHash
-                #{@block.height.to_s}
-                - if @block.nextBlockHash != nil
-                  = link_to image_tag("next-arrow-2.png", height: '13'), @block.nextBlockHash
-            %div
-              %dt Block Hash
-              %dd
-                %code
-                  #{@block.blockHash}
-            %div
-              %dt Block Time
-              %dd
-                - t = ActiveSupport::TimeZone["UTC"].parse(@block.blockTime.to_s[0..18])
-                = local_time(t.to_s, '%Y-%m-%d %H:%M:%S %Z')
-                (#{t.to_s})
-            %div
-              %dt Total Output
-              %dd
-                = totalOut(@block)
-                XPY
-            %div
-              %dt Number of Txs
-              %dd #{@block.transactions.length.to_s}
-            %div
-              %dt Difficulty
-              %dd #{@block.difficulty.round(8)}
-            %div
-              %dt Mint
-              %dd #{@block.mint.round(6)}
-            %div
-              %dt Confirmations
-              %dd
-                = confirmations(@block)
-            %div
-              %dt Merkle root
-              %dd #{@block.merkleRoot}
-            %div.clearfix
-              %dt Previous block hash
-              %dd
-                - if @block.previousBlockHash != nil
+    %div.row{:id => 'block-info'}
+      %div.col-lg-12
+        %div.panel.clearfix
+          %div.panel-body{:style => "padding-left: 35px; padding-right: 35px;"}
+            %h1 Block Info
+            %hr
+            %div.dl-horizontal
+              %div
+                %dt Height
+                %dd
+                  - if @block.previousBlockHash != nil
+                    = link_to image_tag("prev-arrow-2.png", height: '13'), @block.previousBlockHash
+                  #{@block.height.to_s}
+                  - if @block.nextBlockHash != nil
+                    = link_to image_tag("next-arrow-2.png", height: '13'), @block.nextBlockHash
+              %div
+                %dt Block Hash
+                %dd
                   %code
-                    = link_to @block.previousBlockHash, @block.previousBlockHash
-                - else
-                  #{''}
-            %div.clearfix
-              %dt Next block hash
-              %dd
-                - if (@block.nextBlockHash != nil)
-                  %code
-                    = link_to @block.nextBlockHash, @block.nextBlockHash
-                - else
-                  #{''}
-            %div
-              %dt Size
-              %dd #{(@block.blockSize.round(4) / 1000)} KB
-
-            %div
-              %dt Flags
-              %dd #{@block.flags}
-      = javascript_include_tag "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", :async => true
-      %ins{:class=>"adsbygoogle", :style=>"display:block",
-        'data-ad-client'=>"ca-pub-3918557346386109",
-        'data-ad-slot'=>"4748001338",
-        'data-ad-format'=>"auto"}
-      :javascript
-        (adsbygoogle = window.adsbygoogle || []).push({});
-
-  %div.wide-position
-    %div.col-lg-12
-      %div
-        %h1.white Transactions
-        %hr
-        - @block.transactions.order(Sequel.asc(:id)).each do |tx|
-          %div.panel
-            %div.panel-body.clearfix
-              %div.block-info-tx.col-sm-12
-                - if tx.coinbase == true
-                  %span.coinbase
-                    Coinbase
-                  %span
-                    =link_to tx.txid, '/tx/' << tx.txid
-                - elsif tx.coinstake == true
-                  %span.coinstake
-                    Coinstake
-                  %span
-                    =link_to tx.txid, '/tx/' << tx.txid
-                - else
-                  =link_to tx.txid, '/tx/' << tx.txid
-              %div.block-info-content
-                %div.addresses.clearfix
-                  - if tx.type == 'PoW-Reward' || tx.type == 'PoS-Reward'
-                    - puts tx.type
-                    %div.col-xs-6
-                      %span.fresh-coins
-                        - if tx.coinstake == true
-                          Coinstake Transaction
-                        - else
-                          Newly Generated Coins
-                    %div.col-xs-6.block-info-content.to
-                      -tx.outputs.each do |output|
-                        %span
-                          %div.clearfix
-                            - if output.address == '' && tx.coinbase == true
-                              %div.col-xs-9.text-left
-                                NONSTANDARD
-                              %div.col-xs-3.text-right.spent
-                                0.0
-                            - elsif output.address == '' && tx.coinbase == false
-
-                            - else
-                              %div.col-xs-9.text-left
-                                =link_to output.address, '/address/' + output.address
-                              %div.col-xs-3.text-right.spent
-                                #{'%.6f' % output.value}
-
+                    #{@block.blockHash}
+              %div
+                %dt Block Time
+                %dd
+                  - t = ActiveSupport::TimeZone["UTC"].parse(@block.blockTime.to_s[0..18])
+                  = local_time(t.to_s, '%Y-%m-%d %H:%M:%S %Z')
+                  (#{t.to_s})
+              %div
+                %dt Total Output
+                %dd
+                  = total_out(@block)
+                  XPY
+              %div
+                %dt Number of Txs
+                %dd #{@block.transactions.length.to_s}
+              %div
+                %dt Difficulty
+                %dd #{@block.difficulty.round(8)}
+              %div
+                %dt Mint
+                %dd #{@block.mint.round(6)}
+              %div
+                %dt Confirmations
+                %dd
+                  = confirmations(@block)
+              %div
+                %dt Merkle root
+                %dd #{@block.merkleRoot}
+              %div.clearfix
+                %dt Previous block hash
+                %dd
+                  - if @block.previousBlockHash != nil
+                    %code
+                      = link_to @block.previousBlockHash, @block.previousBlockHash
                   - else
-                    %div.col-xs-6.block-info-content.from
-                      -tx.inputs.each do |input|
-                        %span
-                          %div.col-xs-9
-                            - iAddress = getInputAddress(input)
-                            =link_to input.address, '/address/' + input.address
-                          %div.col-xs-3.text-right.spent
-                            - if input.value != nil
-                              #{'%.6f' % (input.value * -1)}
-                            - else
-                              #{'%.6f' % input.value}
-                    %div.col-xs-6.block-info-content.to
-                      -tx.outputs.each do |output|
-                        - if output.type == 'nonstandard'
-                          - next
-                        %span
-                          %div.col-xs-9
-                            =link_to output.address, '/address/' + output.address
-                          %div.col-xs-3.text-right.spent
-                            #{'%.6f' % output.value}
-              %div.info.sum.clearfix
-                %div.col-sm-12
-                  %div.col-lg-9.text-right
-                    %div
-                      Fee:
-                    %div
-                      Transaction sum:
-                  %div.col-lg-3.text-left
+                    #{''}
+              %div.clearfix
+                %dt Next block hash
+                %dd
+                  - if (@block.nextBlockHash != nil)
+                    %code
+                      = link_to @block.nextBlockHash, @block.nextBlockHash
+                  - else
+                    #{''}
+              %div
+                %dt Size
+                %dd #{(@block.blockSize.round(4) / 1000)} KB
+
+              %div
+                %dt Flags
+                %dd #{@block.flags}
+        = javascript_include_tag "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", :async => true
+        %ins{:class=>"adsbygoogle", :style=>"display:block",
+          'data-ad-client'=>"ca-pub-3918557346386109",
+          'data-ad-slot'=>"4748001338",
+          'data-ad-format'=>"auto"}
+        :javascript
+          (adsbygoogle = window.adsbygoogle || []).push({});
+
+    %div.wide-position
+      %div.col-lg-12
+        %div
+          %h1.white Transactions
+          %hr
+          - @block.transactions.order(Sequel.asc(:id)).each do |tx|
+            %div.panel
+              %div.panel-body.clearfix
+                %div.block-info-tx.col-sm-12
+                  - if tx.coinbase == true
+                    %span.coinbase
+                      Coinbase
+                    %span
+                      =link_to tx.txid, '/tx/' << tx.txid
+                  - elsif tx.coinstake == true
+                    %span.coinstake
+                      Coinstake
+                    %span
+                      =link_to tx.txid, '/tx/' << tx.txid
+                  - else
+                    =link_to tx.txid, '/tx/' << tx.txid
+                %div.block-info-content
+                  %div.addresses.clearfix
                     - if tx.type == 'PoW-Reward' || tx.type == 'PoS-Reward'
-                      %div.fee
-                        0.000000 XPY
+                      - puts tx.type
+                      %div.col-xs-6
+                        %span.fresh-coins
+                          - if tx.coinstake == true
+                            Coinstake Transaction
+                          - else
+                            Newly Generated Coins
+                      %div.col-xs-6.block-info-content.to
+                        -tx.outputs.each do |output|
+                          %span
+                            %div.clearfix
+                              - if output.address == '' && tx.coinbase == true
+                                %div.col-xs-9.text-left
+                                  NONSTANDARD
+                                %div.col-xs-3.text-right.spent
+                                  0.0
+                              - elsif output.address == '' && tx.coinbase == false
+
+                              - else
+                                %div.col-xs-9.text-left
+                                  =link_to output.address, '/address/' + output.address
+                                %div.col-xs-3.text-right.spent
+                                  #{'%.6f' % output.value}
+
                     - else
-                      %div.fee
-                        #{'%.6f' % tx.fees.round(6)} XPY
-                    %div
+                      %div.col-xs-6.block-info-content.from
+                        -tx.inputs.each do |input|
+                          %span
+                            %div.col-xs-9
+                              - iAddress = get_input_address(input)
+                              =link_to input.address, '/address/' + input.address
+                            %div.col-xs-3.text-right.spent
+                              - if input.value != nil
+                                #{'%.6f' % (input.value * -1)}
+                              - else
+                                #{'%.6f' % input.value}
+                      %div.col-xs-6.block-info-content.to
+                        -tx.outputs.each do |output|
+                          - if output.type == 'nonstandard'
+                            - next
+                          %span
+                            %div.col-xs-9
+                              =link_to output.address, '/address/' + output.address
+                            %div.col-xs-3.text-right.spent
+                              #{'%.6f' % output.value}
+                %div.info.sum.clearfix
+                  %div.col-sm-12
+                    %div.col-lg-9.text-right
+                      %div
+                        Fee:
+                      %div
+                        Transaction sum:
+                    %div.col-lg-3.text-left
                       - if tx.type == 'PoW-Reward' || tx.type == 'PoS-Reward'
-                        #{'%.6f' % tx.fees.round(6)} XPY
+                        %div.fee
+                          0.000000 XPY
                       - else
-                        #{'%.6f' % tx.totalOutput} XPY
+                        %div.fee
+                          #{'%.6f' % tx.fees.round(6)} XPY
+                      %div
+                        - if tx.type == 'PoW-Reward' || tx.type == 'PoS-Reward'
+                          #{'%.6f' % tx.fees.round(6)} XPY
+                        - else
+                          #{'%.6f' % tx.totalOutput} XPY

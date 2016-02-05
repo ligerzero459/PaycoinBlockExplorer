@@ -44,7 +44,7 @@
               %td
                 = (block.transactions.length).to_s
               %td
-                = totalOut(block)
+                = total_out(block)
               %td
                 - t = ActiveSupport::TimeZone["UTC"].parse(block.blockTime.to_s[0..18])
                 = time_ago_in_words(local_time(t))

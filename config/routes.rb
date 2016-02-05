@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get 'richlist' => 'rich_lists#index', as: 'richlist'
   get 'address/:address' => 'addresses#show'
 
+  # get '*any', via: :all, to: 'errors#error404'
+  match "/404" => "errors#error404", via: [ :get, :post, :patch, :delete ]
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
