@@ -25,7 +25,7 @@
 
   %div.col-lg-8
     %div.panel
-      %table.table
+      %table.table.table-responsive
         %thead
           %tr
             %th Block Height
@@ -39,8 +39,8 @@
             %tr
               %td= link_to block.height.to_s, 'block/' << block.blockHash.to_s
               %td
-                %code
-                  = block.blockHash.to_s
+                %code.hash
+                  = link_to block.blockHash.to_s, 'block/' << block.blockHash.to_s
               %td
                 = (block.transactions.length).to_s
               %td
