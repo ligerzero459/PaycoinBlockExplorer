@@ -4,7 +4,7 @@ class BlocksController < ApplicationController
 
   # GET /blocks
   def index
-    @blocks = Block.order(:height).reverse.limit(30)
+    @blocks = Block.order(:height).reverse.limit(15)
     getAnnouncements
   end
 

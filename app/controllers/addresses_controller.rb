@@ -18,7 +18,7 @@ class AddressesController < ApplicationController
                   .select_append{sum(:ledger__value).as(value)}
                   .select_append{max(:ledger__balance).as(balance)}
                   .where(:ledger__address => params[:address], :ledger__type => 'output')
-                  .group(:ledger__txid, :ledger__type).order(Sequel.desc(:id))
+                  .group(:ledger__txid, :ledger__type).order(Sequel.desc(:id)).limit(15)
                   .union(Ledger.join(:transactions, :txid=>:txid)
                              .join(:blocks, :id=>:transactions__block_id)
                              .select(:ledger__id, :blocks__blockHash, :blocks__height, :ledger__txid, :ledger__address, :ledger__type)
@@ -26,7 +26,7 @@ class AddressesController < ApplicationController
                              .select_append{max(:ledger__balance).as(balance)}
                              .where(:ledger__address => params[:address], :ledger__type => 'input')
                              .group(:ledger__txid, :ledger__type)
-                  ).order(Sequel.desc(:id))
+                  ).order(Sequel.desc(:id)).limit(15)
     temp.max_block = Block.max(:height)
     temp.sent = (Ledger.where(:address => params[:address], :type => 'input').sum(:value))
     if temp.sent != nil
