@@ -30,9 +30,9 @@
           %tr
             %th Block Height
             %th Hash
-            %th Transactions
+            %th.small-table-tx Transactions
             %th Total Output
-            %th Time
+            %th.small-table-time Time
 
         %tbody
           - @blocks.each do |block|
@@ -41,11 +41,11 @@
               %td
                 %code.hash
                   = link_to block.blockHash.to_s, 'block/' << block.blockHash.to_s
-              %td
+              %td.small-table-tx
                 = (block.transactions.length).to_s
               %td
                 = total_out(block)
-              %td
+              %td.small-table-time
                 - t = ActiveSupport::TimeZone["UTC"].parse(block.blockTime.to_s[0..18])
                 = time_ago_in_words(local_time(t))
 
@@ -57,3 +57,22 @@
       'data-ad-format'=>"auto"}
     :javascript
       (adsbygoogle = window.adsbygoogle || []).push({});
+
+%div.col-lg-12
+  .col-lg-2.clearfix
+  .col-lg-4.pull-left.white
+    %h4 Copyright &copy; 2016
+  .col-lg-4.pull-right.white
+    %div
+      %h4
+        BTC Donations:
+        %code
+          = ENV['BTC_ADDRESS']
+    %div
+      %h4
+        XPY Donations:
+        %code
+          = ENV['XPY_ADDRESS']
+    %div
+      All donations greatly appreciated and help keep the servers online
+  .col-lg-2.clearfix
