@@ -55,7 +55,7 @@
               %div.col-sm-3.to-row-tx
                 %h5
 
-                  = link_to 'Block: ' + tx.to_hash[:height].to_s, '/blocks/' + tx.to_hash[:blockHash]
+                  = link_to 'Block: ' + tx.to_hash[:height].to_s, '/block/' + tx.to_hash[:blockHash]
               %div.col-sm-3.to-row-tx
                 %h5 Confirmations: #{@address_data.max_block-tx.to_hash[:height]}
               %div.col-sm-3.balance-row-tx
