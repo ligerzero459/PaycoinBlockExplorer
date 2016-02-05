@@ -25,9 +25,16 @@ class AddressesController < ApplicationController
                              .select_append{sum(:ledger__value).as(value)}
                              .select_append{max(:ledger__balance).as(balance)}
                              .where(:ledger__address => params[:address], :ledger__type => 'input')
-                             .group(:ledger__txid, :ledger__type)
-                  ).order(Sequel.desc(:id)).limit(15)
+                             .group(:ledger__txid, :ledger__type).limit(15)
+                  ).order(Sequel.desc(:id))
     temp.max_block = Block.max(:height)
+    temp.transaction_count = Ledger
+                                 .where(:ledger__address => params[:address], :ledger__type => 'output')
+                                 .group(:ledger__txid, :ledger__type)
+                                 .union(Ledger
+                                            .where(:ledger__address => params[:address], :ledger__type => 'input')
+                                            .group(:ledger__txid, :ledger__type)
+                                 ).count()
     temp.sent = (Ledger.where(:address => params[:address], :type => 'input').sum(:value))
     if temp.sent != nil
       temp.sent = temp.sent.abs.round(6)
@@ -36,6 +43,7 @@ class AddressesController < ApplicationController
     end
     temp.received = Ledger.where(:address => params[:address], :type => 'output').sum(:value).round(6)
     @address_data = temp
+    render stream: true
   end
 
   def generate_qr_code(address)
