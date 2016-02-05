@@ -1069,11 +1069,24 @@ pre code {
     width: 100%;
     padding-bottom: 20px;
   }
+
+  .tx-in-out-header {
+    display: none;
+  }
+
+  .small-table-time,
+  .small-table-tx{
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
   .wide-position {
     width: 100%;
+  }
+
+  .small-table-tx {
+    display: none;
   }
 }
 

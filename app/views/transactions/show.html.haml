@@ -54,8 +54,15 @@
   %div.wide-position
     %div.col-lg-12
       %div
+        %h1.white Inputs & Outputs
+        %hr
         %div.panel
           %div.panel-body.clearfix
+            %div.tx-in-out-header.col-sm-12.clearfix
+              %div.col-xs-6
+                Inputs
+              %div.col-xs-6.to
+                Outputs
             %div.block-info-content
               %div.addresses.clearfix
                 - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
