@@ -10,6 +10,18 @@ class AddressesController < ApplicationController
   # GET /addresses/1
   # GET /addresses/1.json
   def show
+    if params[:limit] == nil
+      limit = 30
+    elsif params[:limit].downcase == 'all'
+      limit = 100000;
+    else
+      params[:limit] = params[:limit].to_i
+      if params[:limit] == 0
+        limit = 30
+      else
+        limit = params[:limit]
+      end
+    end
     temp = OpenStruct.new
     temp.address = Address.find(:address => params[:address])
     @ledger = Ledger.join(:transactions, :txid=>:txid)
@@ -18,7 +30,7 @@ class AddressesController < ApplicationController
                   .select_append{sum(:ledger__value).as(value)}
                   .select_append{max(:ledger__balance).as(balance)}
                   .where(:ledger__address => params[:address])
-                  .group(:ledger__txid, :ledger__type).order(Sequel.desc(:id)).limit(30)
+                  .group(:ledger__txid, :ledger__type).order(Sequel.desc(:id)).limit(limit)
     temp.max_block = Block.max(:height)
     temp.transaction_count = Ledger
                                  .where(:ledger__address => params[:address])

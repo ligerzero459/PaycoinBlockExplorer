@@ -41,6 +41,15 @@
               = link_to 'Send Paycoin', 'paycoin:' + @address_data.address.address, {:class => 'btn btn-primary'}
   %div.wide-position
     %div.row{:id => 'address_info_tx'}
+      %div.col-lg-12{:style => "margin-bottom: 15px;"}
+        = form_tag(address_path, :method => 'get', :enforce_utf8 => false) do
+          %div.col-sm-9.clearfix
+          %div.col-sm-2.clearfix
+            %div.input-group
+              = select_tag :limit, options_for_select([30, 100, 1000, 'ALL'], 30), {:class => 'form-control'}
+              %span.input-group-btn
+                = submit_tag 'OK', {:class => 'btn btn-default', :name => nil}
+          %div.col-sm-1.clearfix
       %div.col-lg-12
         - @ledger.each do |tx|
           %div.clearfix{:class => 'panel' + (tx.type == 'input' ? ' negative' : '')}

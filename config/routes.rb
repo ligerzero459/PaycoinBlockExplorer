@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'tx/:txid' => 'transactions#show'
   get 'search/index' => 'searches#index', as: 'search'
   get 'richlist' => 'rich_lists#index', as: 'richlist'
-  get 'address/:address' => 'addresses#show'
+  get 'address/:address' => 'addresses#show', as: 'address'
 
   # get '*any', via: :all, to: 'errors#error404'
   match "/404" => "errors#error404", via: [ :get, :post, :patch, :delete ]
