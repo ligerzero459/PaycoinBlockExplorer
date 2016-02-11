@@ -789,14 +789,14 @@ samp {
 code {
   padding: 3px 4px;
   font-size: 95%;
-  color: #c7254e;
+  color: #8c0822;
   white-space: nowrap;
-  background-color: #545253;
+  background-color: #afbdca;
   border-radius: 4px;
 }
 
 code a, code a:hover, a .hash:hover, .table-hover>tbody>tr:hover code a, code a:visited {
-  color: #c7254e;
+  color: #8c0822;
   vertical-align: middle;
 }
 
