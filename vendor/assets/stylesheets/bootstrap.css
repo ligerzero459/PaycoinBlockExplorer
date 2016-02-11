@@ -1095,6 +1095,10 @@ pre code {
     width: 57%;
     padding-left: 10px;
   }
+
+  .small-table-tx {
+    display: table-cell;
+  }
 }
 
 .fresh-coins {
