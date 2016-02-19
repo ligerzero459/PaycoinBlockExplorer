@@ -24,13 +24,10 @@ class AddressesController < ApplicationController
     end
     temp = OpenStruct.new
     temp.address = Address.find(:address => params[:address])
-    @ledger = Ledger.join(:transactions, :txid=>:txid)
-                  .join(:blocks, :id=>:transactions__block_id)
-                  .select(:ledger__id, :blocks__blockHash, :blocks__height, :ledger__txid, :ledger__address, :ledger__type)
-                  .select_append{sum(:ledger__value).as(value)}
-                  .select_append{max(:ledger__balance).as(balance)}
-                  .where(:ledger__address => params[:address])
-                  .group(:ledger__txid, :ledger__type).order(Sequel.desc(:id)).limit(limit)
+    @ledger = Ledger.select_append{sum(:value).as(value)}
+                  .select_append{max(:balance).as(balance)}
+                  .where(:address => params[:address])
+                  .group(:txid, :type).order(Sequel.desc(:id)).limit(limit)
     temp.max_block = Block.max(:height)
     temp.transaction_count = Ledger
                                  .where(:ledger__address => params[:address])
