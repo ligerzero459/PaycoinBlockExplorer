@@ -31,10 +31,16 @@
                 = outputSum(@transaction)
             %div.clearfix
               %dt Traded
-              %dd #{@transaction.totalOutput} XPY
+              - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                %dd #{@transaction.fees} XPY
+              - else
+                %dd #{@transaction.totalOutput} XPY
             %div.clearfix
               %dt Fee
-              %dd #{@transaction.fees} XPY
+              - if @transaction.type == 'PoW-Reward' || @transaction.type == 'PoS-Reward'
+                %dd 0.000000 XPY
+              - else
+                %dd #{@transaction.fees} XPY
             %div.clearfix
               %dt Confirmations
               %dd
