@@ -97,12 +97,12 @@
             %div.panel
               %div.panel-body.clearfix
                 %div.block-info-tx.col-sm-12
-                  - if tx.coinbase == true
+                  - if tx.coinbase || tx.type == 'PoW-Reward'
                     %span.coinbase
                       Coinbase
                     %span
                       =link_to tx.txid, '/tx/' << tx.txid
-                  - elsif tx.coinstake == true
+                  - elsif tx.coinstake
                     %span.coinstake
                       Coinstake
                     %span
@@ -115,7 +115,7 @@
                       - puts tx.type
                       %div.col-xs-6
                         %span.fresh-coins
-                          - if tx.coinstake == true
+                          - if tx.coinstake
                             Coinstake Transaction
                           - else
                             Newly Generated Coins
