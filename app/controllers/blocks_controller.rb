@@ -2,15 +2,26 @@ class BlocksController < ApplicationController
   helper_method :total_out, :confirmations, :max_blocks
   helper_method :get_input_address, :get_announcements, :block_missing
 
-  # GET /blocks
+  # GET /block
   def index
     @blocks = Block.order(:height).reverse.limit(15)
     get_announcements
   end
 
-  # GET /blocks/{hash}
+  # GET /block/{hash}
   def show
     @block = Block.find(:blockHash => params[:id])
+  end
+
+
+  # GET /block-height/{height}
+  def show_height
+    if params[:id].strip.length <= 7
+      @block = Block.find(:height=>params[:id].strip)
+      render "show"
+    else
+      redirect_to("/block/" << params[:id])
+    end
   end
 
   # helpers
