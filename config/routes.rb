@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'block' => redirect('/')
   get 'block/:id' => 'blocks#show'
   get 'blocks/:id' => redirect{|params, request| "/block/#{params[:id]}"}
+  get 'block-height/:id' => 'blocks#show_height'
   get 'tx/:txid' => 'transactions#show'
   get 'search/index' => 'searches#index', as: 'search'
   get 'richlist' => 'rich_lists#index', as: 'richlist'
