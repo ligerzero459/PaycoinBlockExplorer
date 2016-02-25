@@ -141,7 +141,6 @@
                         -tx.inputs.each do |input|
                           %span
                             %div.col-xs-9
-                              - iAddress = get_input_address(input)
                               =link_to input.address, '/address/' + input.address
                             %div.col-xs-3.text-right.spent
                               - if input.value != nil
